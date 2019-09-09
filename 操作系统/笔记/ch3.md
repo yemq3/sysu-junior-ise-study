@@ -5,13 +5,18 @@
 A process include：
 
 - Text section
+
 - Data section
+
 - Heap section
+
 - Stack section
 
-![1567383754219](C:\Users\yemq3\Desktop\学习\操作系统\笔记\ch3.assets\1567383754219.png)
 
-![1567756848372](C:\Users\yemq3\Desktop\学习\操作系统\笔记\ch3.assets\1567756848372.png)
+
+![1567383754219](ch3.assets/1567383754219.png)
+
+![1567756848372](ch3.assets/1567756848372.png)
 
 ### Process State
 
@@ -21,7 +26,7 @@ A process include：
 - Ready. The process is waiting to be assigned to a processor.
 - Terminated. The process has finished execution
 
-![1567383695601](C:\Users\yemq3\Desktop\学习\操作系统\笔记\ch3.assets\1567383695601.png)
+![1567383695601](ch3.assets/1567383695601.png)
 
 ### Process Control Block(PCB)
 
@@ -29,9 +34,7 @@ Each process is represented in the operating system by a process control block (
 
 It contains many pieces of information associated with a specific process, including these:
 
-![1567383837550](C:\Users\yemq3\Desktop\学习\操作系统\笔记\ch3.assets\1567383837550.png)
-
-
+![1567383837550](ch3.assets/1567383837550.png)
 
 ### Threads
 
@@ -47,15 +50,17 @@ Linux的PCB采用`task_struct`表示，位于<linux/sched.h>
 
 等待特定事件发生的进程会被放入`wait queue`
 
-![1567384352656](C:\Users\yemq3\Desktop\学习\操作系统\笔记\ch3.assets\1567384352656.png)
 
-![1567384576630](C:\Users\yemq3\Desktop\学习\操作系统\笔记\ch3.assets\1567384576630.png)
+
+![1567384352656](ch3.assets/1567384352656.png)
+
+![1567384576630](ch3.assets/1567384576630.png)
 
 ### CPU Scheduling
 
 ### Context Switch
 
-![1567384686935](C:\Users\yemq3\Desktop\学习\操作系统\笔记\ch3.assets\1567384686935.png)
+![1567384686935](ch3.assets/1567384686935.png)
 
 ## Operations on Processes
 
@@ -96,7 +101,7 @@ int main()
 }
 ```
 
-![1567385096591](C:\Users\yemq3\Desktop\学习\操作系统\笔记\ch3.assets\1567385096591.png)
+![1567385096591](ch3.assets/1567385096591.png)
 
 ## Interprocess Communication
 

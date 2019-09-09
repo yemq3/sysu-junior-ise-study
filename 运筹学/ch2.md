@@ -32,7 +32,7 @@
 
 - 凸集：对于集合内的每一对点，连接该对点的直线段上的每个点也在该集合内。
 
-![img](C:\Users\yemq3\Desktop\学习\运筹学\ch2.assets\Convex_polygon_illustration1.svg-1567414761776.png)
+![Convex_polygon_illustration1.svg-1567414761776](ch2.assets/Convex_polygon_illustration1.svg-1567414761776.png)
 
 - 凸组合：指点的线性组合，要求所有系数都非负且和为 1。
 - 顶点：设K为凸集，$X\in K$；若X不能用不同的两点$X^{(1)}\in K$和$X^{(2)}\in K$的线性组合表示为$X=\alpha X^{(1)}+（1-\alpha）X^{(2)}（0 < \alpha < 1）$，则称X为K的一个顶点
