@@ -1,1 +1,1 @@
-# sysu-junior-study
+# sysu-junior-ise-study
