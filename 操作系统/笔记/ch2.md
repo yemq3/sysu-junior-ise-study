@@ -40,9 +40,10 @@ MODULE_AUTHOR("SGG");
 
 `Makefile`文件由一系列`rules`构成，每条`rules`的形式如下
 
-><target>: <prerequisies>
->
->[tab]<commands>
+```makefile
+<target>: <prerequisies>
+[tab]<commands>
+```
 
 上面第一行冒号前面的部分，叫做"目标"（target），冒号后面的部分叫做"前置条件"（prerequisites）；第二行必须由一个tab键起首，后面跟着"命令"（commands）。
 
