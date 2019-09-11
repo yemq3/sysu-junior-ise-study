@@ -1,6 +1,9 @@
 #include <sys/types.h> 
 #include <stdio.h> 
 #include <unistd.h>
+#include <sys/wait.h>
+#include <stdlib.h>
+
 int main(int argc,char *argv[]) 
 {
     int number = atoi(argv[1]); 
@@ -23,6 +26,10 @@ int main(int argc,char *argv[])
 				number = number / 2;
 			} //number is even
 		}
+		if(number <= 0){
+            printf("please enter a positive number.");
+            return 1;
+        }
 		printf("1\n");
     } 
     else { /* parent process */ 
