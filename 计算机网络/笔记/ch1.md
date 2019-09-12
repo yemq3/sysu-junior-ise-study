@@ -12,14 +12,14 @@
 
 ## Network core
 
-![1566991157231](C:\Users\yemq3\AppData\Roaming\Typora\typora-user-images\1566991157231.png)
+![1566991157231](ch1.assets/1566991157231.png)
 
 ### Circuit Switching
 
 - FDM：切分频率
 - TDM：切分时间
 
-![1566989999677](C:\Users\yemq3\AppData\Roaming\Typora\typora-user-images\1566989999677.png)
+![1566989999677](ch1.assets/1566989999677.png)
 
 缺点：轻度用户和重度用户占据相同的资源，造成资源浪费
 
@@ -31,7 +31,7 @@
 
 大多数交换机使用`store and forward`的方式进行数据传输，也就是交换机必须接收完整个数据包才能开始传输
 
-![1566990705142](C:\Users\yemq3\AppData\Roaming\Typora\typora-user-images\1566990705142.png)
+![1566990705142](ch1.assets/1566990705142.png)
 $$
 d_{end-to-end}=N\frac{L}{R}\\
 N---number\ of\ links(routers+1)
@@ -45,7 +45,7 @@ $$
 
 ### Network Strucure
 
-![1566991344912](C:\Users\yemq3\AppData\Roaming\Typora\typora-user-images\1566991344912.png)
+![1566991344912](ch1.assets/1566991344912.png)
 
 IXP：Internet exchange point（用于ISP之间的连接）
 
@@ -73,11 +73,11 @@ IXP：Internet exchange point（用于ISP之间的连接）
 - *L:* packet length (bits)
 - a: average packet arrival rate
 
-![1566991969201](C:\Users\yemq3\AppData\Roaming\Typora\typora-user-images\1566991969201.png)
+![1566991969201](ch1.assets/1566991969201.png)
 
 ####  Transmission delay
 
-![1566990226639](C:\Users\yemq3\AppData\Roaming\Typora\typora-user-images\1566990226639.png)
+![1566990226639](ch1.assets/1566990226639.png)
 
 #### Propagation delay
 
