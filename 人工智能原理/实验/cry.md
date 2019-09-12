@@ -1,3 +1,7 @@
+## Softmax
+
+减去最大值防止上溢出
+
 ## Gradient Checking
 
 导数定义的衍生：
