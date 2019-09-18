@@ -466,8 +466,8 @@ class LeNet5(Net):
         h4 = self.FC2._forward(a3)
         a5 = self.ReLU4._forward(h4)
         h5 = self.FC3._forward(a5)
-        a5 = self.Softmax._forward(h5)
-        return a5
+        # a5 = self.Softmax._forward(h5)
+        return h5
 
     def backward(self, dout):
         #dout = self.Softmax._backward(dout)
@@ -527,7 +527,7 @@ X_train, X_test = X_train/float(255), X_test/float(255)
 X_train -= np.mean(X_train)
 X_test -= np.mean(X_test)
 
-batch_size = 64
+batch_size = 16
 D_in = 784
 D_out = 10
 
@@ -548,21 +548,22 @@ optim = SGDMomentum(model.get_params(), lr=0.0001, momentum=0.80, reg=0.00003)
 criterion = CrossEntropyLoss()
 
 # TRAIN
-ITER = 25000
+ITER = 250
 for i in range(ITER):
-	# get batch, make onehot
-	X_batch, Y_batch = get_batch(X_train, Y_train, batch_size)
-	Y_batch = MakeOneHot(Y_batch, D_out)
+    # get batch, make onehot
+    X_batch, Y_batch = get_batch(X_train, Y_train, batch_size)
+    Y_batch = MakeOneHot(Y_batch, D_out)
 
-	# forward, loss, backward, step
-	Y_pred = model.forward(X_batch)
-	loss, dout = criterion.get(Y_pred, Y_batch)
-	model.backward(dout)
-	optim.step()
+    # forward, loss, backward, step
+    X_batch = X_batch.reshape(batch_size,1,28,28)
+    Y_pred = model.forward(X_batch)
+    loss, dout = criterion.get(Y_pred, Y_batch)
+    model.backward(dout)
+    optim.step()
 
-	if i % 100 == 0:
-		print("%s%% iter: %s, loss: %s" % (100*i/ITER,i, loss))
-		losses.append(loss)
+    if i % 10 == 0:
+        print("%s%% iter: %s, loss: %s" % (100*i/ITER,i, loss))
+        losses.append(loss)
 
 
 # save params
@@ -575,12 +576,14 @@ draw_losses(losses)
 
 
 # TRAIN SET ACC
+X_train = X_train.reshape(batch_size,1,28,28)
 Y_pred = model.forward(X_train)
 result = np.argmax(Y_pred, axis=1) - Y_train
 result = list(result)
 print("TRAIN--> Correct: " + str(result.count(0)) + " out of " + str(X_train.shape[0]) + ", acc=" + str(result.count(0)/X_train.shape[0]))
 
 # TEST SET ACC
+X_test = X_test.reshape(batch_size,1,28,28)
 Y_pred = model.forward(X_test)
 result = np.argmax(Y_pred, axis=1) - Y_test
 result = list(result)

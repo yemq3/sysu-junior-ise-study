@@ -175,3 +175,8 @@ $$
   - 调度程序从最高优先级调度类取最高优先级任务
 - 按比例分配时间，根据为友好度，较低的友好度对应较高的相对优先级
 - 红黑树记录vruntime，vruntime低的会被先执行
+
+## Assignment
+
+- 5.4, 5.5
+- Scheduling Algorithms
