@@ -191,108 +191,171 @@ class Dropout():
         return dX
 
 class Conv():
-    """
-    Conv layer
-    """
-    def __init__(self, Cin, Cout, F, stride=1, padding=0, bias=True):
-        self.Cin = Cin
-        self.Cout = Cout
-        self.F = F
-        self.S = stride
-        #self.W = {'val': np.random.randn(Cout, Cin, F, F), 'grad': 0}
-        self.W = {'val': np.random.normal(0.0,np.sqrt(2/Cin),(Cout,Cin,F,F)), 'grad': 0} # Xavier Initialization
-        self.b = {'val': np.random.randn(Cout), 'grad': 0}
-        self.cache = None
-        self.pad = padding
+    def __init__(self, in_channels, out_channels, kernel_size, stride=1):
+        self.in_channels = in_channels
+        self.out_channels = out_channels
+        self.kernel_size = kernel_size
+        self.weight_size = (self.out_channels, self.in_channels, self.kernel_size, self.kernel_size)
+        self.stride = stride
 
-    def _forward(self, X):
-#         X = np.pad(X, ((0,0),(0,0),(self.pad,self.pad),(self.pad,self.pad)), 'constant')
-        (N, Cin, H, W) = X.shape
-        H_ = H - self.F + 1
-        W_ = W - self.F + 1
-        Y = np.zeros((N, self.Cout, H_, W_))
-
-        for n in range(N):
-            for c in range(self.Cout):
-                for h in range(H_):
-                    for w in range(W_):
-                        Y[n, c, h, w] = np.sum(X[n, :, h:h+self.F, w:w+self.F] * self.W['val'][c, :, :, :]) + self.b['val'][c]
-
-        self.cache = X
-        return Y
-
-    def _backward(self, dout):
-        # dout (N,Cout,H_,W_)
-        # W (Cout, Cin, F, F)
-        X = self.cache
-        (N, Cin, H, W) = X.shape
-        H_ = H - self.F + 1
-        W_ = W - self.F + 1
-        W_rot = np.rot90(np.rot90(self.W['val']))
-
-        dX = np.zeros(X.shape)
-        dW = np.zeros(self.W['val'].shape)
-        db = np.zeros(self.b['val'].shape)
-
-        # dW
-        for co in range(self.Cout):
-            for ci in range(Cin):
-                for h in range(self.F):
-                    for w in range(self.F):
-                        dW[co, ci, h, w] = np.sum(X[:,ci,h:h+H_,w:w+W_] * dout[:,co,:,:])
-
-        # db
-        for co in range(self.Cout):
-            db[co] = np.sum(dout[:,co,:,:])
-
-        dout_pad = np.pad(dout, ((0,0),(0,0),(self.F,self.F),(self.F,self.F)), 'constant')
-        #print("dout_pad.shape: " + str(dout_pad.shape))
-        # dX
-        for n in range(N):
-            for ci in range(Cin):
-                for h in range(H):
-                    for w in range(W):
-                        #print("self.F.shape: %s", self.F)
-                        #print("%s, W_rot[:,ci,:,:].shape: %s, dout_pad[n,:,h:h+self.F,w:w+self.F].shape: %s" % ((n,ci,h,w),W_rot[:,ci,:,:].shape, dout_pad[n,:,h:h+self.F,w:w+self.F].shape))
-                        dX[n, ci, h, w] = np.sum(W_rot[:,ci,:,:] * dout_pad[n, :, h:h+self.F,w:w+self.F])
-
-        return dX
-
-class MaxPool():
-    def __init__(self, F, stride):
-        self.F = F
-        self.S = stride
+        self.W = {'val': np.random.standard_normal(self.weight_size), 'grad': 0}
+        self.b = {'val':  np.random.standard_normal((self.out_channels,1)), 'grad': 0}
+        
         self.cache = None
 
-    def _forward(self, X):
-        # X: (N, Cin, H, W): maxpool along 3rd, 4th dim
-        (N,Cin,H,W) = X.shape
-        F = self.F
-        W_ = int(float(W)/F)
-        H_ = int(float(H)/F)
-        Y = np.zeros((N,Cin,W_,H_))
-        M = np.zeros(X.shape) # mask
-        for n in range(N):
-            for cin in range(Cin):
-                for w_ in range(W_):
-                    for h_ in range(H_):
-                        Y[n,cin,w_,h_] = np.max(X[n,cin,F*w_:F*(w_+1),F*h_:F*(h_+1)])
-                        i,j = np.unravel_index(X[n,cin,F*w_:F*(w_+1),F*h_:F*(h_+1)].argmax(), (F,F))
-                        M[n,cin,F*w_+i,F*h_+j] = 1
-        self.cache = M
-        return Y
+    def _forward(self, x):
+        (N,C,H,W) = x.shape
+        self.input_shape = x.shape
+        H_out = (H - self.kernel_size) // self.stride + 1
+        W_out = (W - self.kernel_size) // self.stride + 1
+        conv_out = np.zeros((N, self.out_channels, H_out, W_out))
+        self.col_image = []
+        
+        weight_cols = self.W['val'].reshape(self.out_channels, -1)
+        self.col_image = split_by_strides(x,self.kernel_size,self.kernel_size,self.stride)
+        conv_out = (np.dot(self.col_image, weight_cols.T) + self.b['val'].T).transpose(0,2,1).reshape(N, self.out_channels, H_out, W_out)
+        
+        return conv_out
+        
+    def _backward(self, error):
+        (N,C,_,_) = error.shape
+        error_col = error.reshape(N,C,-1)
+        for i in range(N):
+            self.W['grad'] += np.dot(error_col[i], self.col_image[i]).reshape(self.W['val'].shape)
+        self.b['grad'] += np.sum(error_col, axis=(0,2)).reshape(self.b['val'].shape)
+        
+        error_pad =np.pad(error, ((0,0), (0,0), (self.kernel_size - 1, self.kernel_size - 1),
+                          (self.kernel_size - 1, self.kernel_size - 1)), 'constant', constant_values=0)
+        
+        flip_weights = self.W['val'][:, :, ::-1, ::-1]
+        flip_weights = flip_weights.swapaxes(0,1) # hard to make sure
+        col_flip_weights = flip_weights.reshape(self.in_channels, -1)
+        
+#         col_pad_delta = np.array([im2col(error_pad[i][np.newaxis, :], self.kernel_size, self.stride) for i in range(N)])
+        col_pad_delta = split_by_strides(error_pad,self.kernel_size,self.kernel_size,self.stride)
+        next_delta = np.dot(col_pad_delta, col_flip_weights.T)
+        next_delta = np.reshape(next_delta.transpose(0,2,1), self.input_shape)
+        
+        return next_delta
+
+def im2col(image, kernel_size, stride):
+    (N, C, H, W) = image.shape
+    image_col = []
+    for i in range(0, H - kernel_size + 1, stride):
+        for j in range(0, W - kernel_size + 1, stride):
+            col = image[:, :, i:i+kernel_size, j:j+kernel_size].reshape(-1)
+            image_col.append(col)
+    image_col = np.array(image_col)
+    return image_col
+
+def im2col_fast(image, kernel_size, stride):
+    # Parameters
+    N, C, H, W = image.shape
+    H_out = (H - kernel_size) // stride + 1
+    W_out = (W - kernel_size) // stride + 1
+    shape = (N, C, H_out, W_out, kernel_size, kernel_size)
+    strides = (*image.strides[:-2], image.strides[-2]*stride,
+               image.strides[-1]*stride, *image.strides[-2:])
+
+    out_view = np.lib.stride_tricks.as_strided(image, shape=shape, strides=stride)
+    return out_view
+
+def split_by_strides(X, kh, kw, s):
+    N, C, H, W = X.shape
+    oh = (H - kh) // s + 1
+    ow = (W - kw) // s + 1
+    strides = (*X.strides[:-2], X.strides[-2]*s, X.strides[-1]*s, *X.strides[-2:])
+    A = np.lib.stride_tricks.as_strided(X, shape=(N,C,oh,ow,kh,kw), strides=strides)
+    return A.transpose(0,2,3,1,4,5).reshape(N,oh*ow,C*kw*kh)
+
+class MaxPool:
+    def __init__(self, pool_h, pool_w, stride=1, pad=0):
+        self.pool_h = pool_h
+        self.pool_w = pool_w
+        self.stride = stride
+        self.pad = pad
+        
+        self.x = None
+        self.arg_max = None
+
+    def _forward(self, x):
+        N, C, H, W = x.shape
+        out_h = int(1 + (H - self.pool_h) / self.stride)
+        out_w = int(1 + (W - self.pool_w) / self.stride)
+        
+        col = im2col(x, self.pool_h, self.pool_w, self.stride, self.pad)
+        col = col.reshape(-1, self.pool_h*self.pool_w)
+        
+        arg_max = np.argmax(col, axis=1)
+        out = np.max(col, axis=1)
+        # 转换
+        out = out.reshape(N, out_h, out_w, C).transpose(0, 3, 1, 2)
+
+        self.x = x
+        self.arg_max = arg_max
+
+        return out
 
     def _backward(self, dout):
-        M = self.cache
-        (N,Cin,H,W) = M.shape
-        dout = np.array(dout)
-        #print("dout.shape: %s, M.shape: %s" % (dout.shape, M.shape))
-        dX = np.zeros(M.shape)
-        for n in range(N):
-            for c in range(Cin):
-                #print("(n,c): (%s,%s)" % (n,c))
-                dX[n,c,:,:] = dout[n,c,:,:].repeat(2, axis=0).repeat(2, axis=1)
-        return dX*M
+        dout = dout.transpose(0, 2, 3, 1)
+        
+        pool_size = self.pool_h * self.pool_w
+        dmax = np.zeros((dout.size, pool_size))
+        dmax[np.arange(self.arg_max.size), self.arg_max.flatten()] = dout.flatten()
+        dmax = dmax.reshape(dout.shape + (pool_size,)) 
+        
+        dcol = dmax.reshape(dmax.shape[0] * dmax.shape[1] * dmax.shape[2], -1)
+        dx = col2im(dcol, self.x.shape, self.pool_h, self.pool_w, self.stride, self.pad)
+        
+        return dx
+    
+def im2col(input_data, filter_h, filter_w, stride=1, pad=0):
+    """
+    Parameters
+    ----------
+    input_data : 由(数据量, 通道, 高, 长)的4维数组构成的输入数据
+    filter_h : 卷积核的高
+    filter_w : 卷积核的长
+    stride : 步幅
+    pad : 填充
+
+    Returns
+    -------
+    col : 2维数组
+    """
+    # 输入数据的形状
+    # N：批数目，C：通道数，H：输入数据高，W：输入数据长
+    N, C, H, W = input_data.shape  
+    out_h = (H + 2*pad - filter_h)//stride + 1  # 输出数据的高
+    out_w = (W + 2*pad - filter_w)//stride + 1  # 输出数据的长
+    # 填充 H,W
+    img = np.pad(input_data, [(0,0), (0,0), (pad, pad), (pad, pad)], 'constant')
+    # (N, C, filter_h, filter_w, out_h, out_w)的0矩阵
+    col = np.zeros((N, C, filter_h, filter_w, out_h, out_w))
+    
+    for y in range(filter_h):
+        y_max = y + stride*out_h
+        for x in range(filter_w):
+            x_max = x + stride*out_w
+            col[:, :, y, x, :, :] = img[:, :, y:y_max:stride, x:x_max:stride]
+    # 按(0, 4, 5, 1, 2, 3)顺序，交换col的列，然后改变形状
+    col = col.transpose(0, 4, 5, 1, 2, 3).reshape(N*out_h*out_w, -1)
+    return col
+
+def col2im(col, input_shape, filter_h, filter_w, stride=1, pad=0):
+    N, C, H, W = input_shape
+    out_h = (H + 2*pad - filter_h)//stride + 1
+    out_w = (W + 2*pad - filter_w)//stride + 1
+    col = col.reshape(N, out_h, out_w, C, filter_h, filter_w).transpose(0, 3, 4, 5, 1, 2)
+
+    img = np.zeros((N, C, H + 2*pad + stride - 1, W + 2*pad + stride - 1))
+    for y in range(filter_h):
+        y_max = y + stride*out_h
+        for x in range(filter_w):
+            x_max = x + stride*out_w
+            img[:, :, y:y_max:stride, x:x_max:stride] += col[:, :, y, x, :, :]
+
+    return img[:, :, pad:H + pad, pad:W + pad]
 
 def NLLLoss(Y_pred, Y_true):
     """
@@ -439,16 +502,16 @@ class LeNet5(Net):
     def __init__(self):
         self.conv1 = Conv(1, 6, 5)
         self.ReLU1 = ReLU()
-        self.pool1 = MaxPool(2,2)
+        self.pool1 = MaxPool(2,2,2)
         self.conv2 = Conv(6, 16, 5)
         self.ReLU2 = ReLU()
-        self.pool2 = MaxPool(2,2)
+        self.pool2 = MaxPool(2,2,2)
         self.FC1 = FC(16*4*4, 120)
         self.ReLU3 = ReLU()
         self.FC2 = FC(120, 84)
         self.ReLU4 = ReLU()
         self.FC3 = FC(84, 10)
-        self.Softmax = Softmax()
+        # self.Softmax = Softmax()
 
         self.p2_shape = None
 
@@ -527,7 +590,7 @@ X_train, X_test = X_train/float(255), X_test/float(255)
 X_train -= np.mean(X_train)
 X_test -= np.mean(X_test)
 
-batch_size = 16
+batch_size = 64
 D_in = 784
 D_out = 10
 
@@ -548,22 +611,24 @@ optim = SGDMomentum(model.get_params(), lr=0.0001, momentum=0.80, reg=0.00003)
 criterion = CrossEntropyLoss()
 
 # TRAIN
-ITER = 250
+ITER = 20000
 for i in range(ITER):
     # get batch, make onehot
     X_batch, Y_batch = get_batch(X_train, Y_train, batch_size)
     Y_batch = MakeOneHot(Y_batch, D_out)
 
-    # forward, loss, backward, step
     X_batch = X_batch.reshape(batch_size,1,28,28)
     Y_pred = model.forward(X_batch)
     loss, dout = criterion.get(Y_pred, Y_batch)
     model.backward(dout)
     optim.step()
 
-    if i % 10 == 0:
+    if i % 100 == 0:
         print("%s%% iter: %s, loss: %s" % (100*i/ITER,i, loss))
         losses.append(loss)
+    
+    if i == 10000:
+        optim = SGDMomentum(model.get_params(), lr=0.00001, momentum=0.80, reg=0.00003)
 
 
 # save params
@@ -573,17 +638,21 @@ with open("weights.pkl","wb") as f:
 
 draw_losses(losses)
 
+# with open("weights.pkl", "rb") as f:
+#     params = pickle.load(f)
+# model.set_params(params)
+
 
 
 # TRAIN SET ACC
-X_train = X_train.reshape(batch_size,1,28,28)
+X_train = X_train.reshape((len(X_train),1,28,28))
 Y_pred = model.forward(X_train)
 result = np.argmax(Y_pred, axis=1) - Y_train
 result = list(result)
 print("TRAIN--> Correct: " + str(result.count(0)) + " out of " + str(X_train.shape[0]) + ", acc=" + str(result.count(0)/X_train.shape[0]))
 
 # TEST SET ACC
-X_test = X_test.reshape(batch_size,1,28,28)
+X_test = X_test.reshape((len(X_test),1,28,28))
 Y_pred = model.forward(X_test)
 result = np.argmax(Y_pred, axis=1) - Y_test
 result = list(result)
