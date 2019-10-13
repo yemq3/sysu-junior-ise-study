@@ -38,8 +38,8 @@ while (true){
     /* ...
     remove an item from buffer to next_consumed 
     ... */
-    signal(mutex);
-    signal(empty);
+    wait(full); 
+    wait(mutex);
     /* ...
     consume the item in next consumed 
     ... */
