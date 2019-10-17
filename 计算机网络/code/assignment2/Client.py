@@ -139,7 +139,7 @@ class Client:
 		self.rtspSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 		try:
 			self.rtspSocket.connect((self.serverAddr, self.serverPort))
-		except:
+		except: 
 			tkinter.messagebox.showwarning('Connection Failed', 'Connection to \'%s\' failed.' %self.serverAddr)
 
 	def sendRtspRequest(self, requestCode):
