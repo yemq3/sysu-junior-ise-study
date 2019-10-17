@@ -59,13 +59,11 @@
 
 ## Multiple access protocols
 
-- 两种链路
-  - 点对点
-  - 广播
-
 ### Ideal Multiple access protocols
 
-![1570583664170](ch6.assets/1570583664170.png)
+- 只有一个节点活跃时，该节点具有R的吞吐量
+- 当有M的节点时，每个活跃节点的吞吐量接近R/M
+- 去中心化
 
 ### MAC protocols
 
@@ -105,9 +103,36 @@
 - 发送阻塞信息并停止发送数据
 - 在固定时间内等待随机的时间再次发送
 
-###### 
+![1571184464935](ch6.assets/1571184464935.png)
 
 #### Taking Turns（轮流接入）
 
+##### Polling protocol（轮询）
 
+选定一个作为主节点，主节点轮询每个节点，告知每个节点能传输的帧的最多数量
 
+##### Token-passing protocol（令牌传递）
+
+只有拥有令牌的才能进行传输，令牌以固定的次序在节点间交换
+
+##### DOCSIS
+
+使用CMTS管理网络，下行使用FDM，上行使用TDM，下行的数据被所有调制解调器收到，上行通道由CMTS控制，调制解调器在特定的时隙中传输
+
+## Switched Local Area Networks
+
+### Link-Layer Addressing and ARP
+
+#### MAC Addresses
+
+- 12位十六进制数
+- 每个适配器的MAC唯一
+- 前6位为厂商号
+- 广播地址为`FF-FF-FF-FF-FF-FF`
+
+#### Address Resolution Protocol (ARP) 
+
+- 将IP解析为MAC
+- ARP只为局域网中的设备服务
+- 主机或路由器维护一个ARP表，包含IP和MAC的映射关系，以及TTL，如果某一行没有使用，会被删除
+- 当ARP表不包含需要的信息时，主机发送ARP查询包，使用广播的方法询问子网中的其他设备，并更新自己的ARP表
