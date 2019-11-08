@@ -77,20 +77,24 @@ class Agent():
         
         # Compute Q(s_t, a) - Q of the current state
         ### CODE ####
-        state_q = self.policy_net(states)
-        curr_q = state_q.gather(1, actions)
+        state_q = self.policy_net(states).gather(1, actions)
         
         # Compute Q function of next state
         ### CODE ####
-        next_state_q = self.target_net(next_states)
+        next_state_q = self.target_net(next_states).detach().max(1)[0]
         
         # Find maximum Q-value of action at next state from target net
         ### CODE ####
-        expected_q = next_state_q.detach().max(1)[0]
+        expected_q = next_state_q * self.discount_factor + rewards
         
         # Compute the Huber Loss
         ### CODE ####
-
+        loss = F.smooth_l1_loss(state_q, expected_q)
         
         # Optimize the model 
         ### CODE ####
+        self.optimizer.zero_grad()
+        loss.backward()
+        for param in policy_net.parameters():
+            param.grad.data.clamp_(-1, 1)
+        optimizer.step()
