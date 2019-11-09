@@ -57,7 +57,7 @@ class Agent():
             ### CODE ####
             # 
             with torch.no_grad():
-                state = torch.Tensor(state).to(device)
+                state = torch.Tensor(state).to(device).unsqueeze(0)
                 q, a = self.policy_net(state).data.cpu().max(1)
         return a
 
