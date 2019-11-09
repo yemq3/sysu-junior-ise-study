@@ -57,7 +57,8 @@ class Agent():
             ### CODE ####
             # 
             with torch.no_grad():
-                q, a = self.policy_net(Variable(state.to(device))).data.cpu().max(1)
+                state = torch.Tensor(state).to(device)
+                q, a = self.policy_net(state).data.cpu().max(1)
         return a
 
     # pick samples randomly from replay memory (with batch_size)
@@ -75,9 +76,16 @@ class Agent():
         next_states = np.float32(history[:, 1:, :, :]) / 255.
         dones = mini_batch[3] # checks if the game is over
         
+        states = torch.Tensor(states).to(device)
+        actions = torch.LongTensor(actions).to(device)
+        rewards = torch.Tensor(rewards).to(device)
+        next_states = torch.Tensor(next_states).to(device)
+        dones = torch.Tensor(dones.astype(np.bool)).to(device)
+
+
         # Compute Q(s_t, a) - Q of the current state
         ### CODE ####
-        state_q = self.policy_net(states).gather(1, actions)
+        state_q = self.policy_net(states).gather(1, actions.unsqueeze(1)).squeeze(1)
         
         # Compute Q function of next state
         ### CODE ####
@@ -85,7 +93,7 @@ class Agent():
         
         # Find maximum Q-value of action at next state from target net
         ### CODE ####
-        expected_q = next_state_q * self.discount_factor + rewards
+        expected_q = rewards + next_state_q * self.discount_factor * (1 - dones)
         
         # Compute the Huber Loss
         ### CODE ####
@@ -95,6 +103,6 @@ class Agent():
         ### CODE ####
         self.optimizer.zero_grad()
         loss.backward()
-        for param in policy_net.parameters():
+        for param in self.policy_net.parameters():
             param.grad.data.clamp_(-1, 1)
-        optimizer.step()
+        self.optimizer.step()
