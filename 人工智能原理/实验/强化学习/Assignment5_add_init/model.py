@@ -14,6 +14,10 @@ class DQN(nn.Module):
         self.fc = nn.Linear(3136, 512)
         self.head = nn.Linear(512, action_size)
 
+        for m in self.modules():
+            if isinstance(m, nn.Conv2d) or isinstance(m, nn.Linear):
+                nn.init.kaiming_normal_(m.weight, mode='fan_out', nonlinearity='relu')
+
     def forward(self, x):
         x = F.relu(self.bn1(self.conv1(x)))
         x = F.relu(self.bn2(self.conv2(x)))
