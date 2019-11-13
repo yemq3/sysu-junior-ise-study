@@ -70,3 +70,28 @@ AP发送`beacon frames`使得客户端可以知道连接AP的信息从而进行�
 ![image-20191106092920694](ch7.assets/image-20191106092920694.png)
 
 [802.11协议精读2：DCF与CSMA/CA](https://zhuanlan.zhihu.com/p/20721272)
+
+### 802.11 Frame
+
+![image-20191113080711527](ch7.assets/image-20191113080711527.png)
+
+- 实际数据在Payload中
+- 使用CRC校验
+
+![image-20191113082144049](ch7.assets/image-20191113082144049.png)
+
+#### Address Fields
+
+![image-20191113080955616](ch7.assets/image-20191113080955616.png)
+
+## Celluar Internet access
+
+- 使用FDMA和TDMA
+- 使用CDMA
+
+![image-20191113083517656](ch7.assets/image-20191113083517656.png)
+
+![image-20191113083539622](ch7.assets/image-20191113083539622.png)
+
+![image-20191113083558238](ch7.assets/image-20191113083558238.png)
+
