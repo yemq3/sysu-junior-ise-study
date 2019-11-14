@@ -19,10 +19,12 @@ class Agent():
 
         # These are hyper parameters for the DQN
         self.discount_factor = 0.99
-        self.epsilon = 1.0
+        self.epsilon = 1.0  
+        self.epsilon_middle = 0.1
         self.epsilon_min = 0.01
-        self.explore_step = 1000000
-        self.epsilon_decay = (self.epsilon - self.epsilon_min) / self.explore_step
+        self.explore_step = 1000000 / 4
+        self.epsilon_first_decay = (self.epsilon - self.epsilon_middle) / self.explore_step
+        self.epsilon_last_decay = (self.epsilon_middle - self.epsilon_min) / self.explore_step
         self.train_start = 100000
         self.update_target = 1000
 
@@ -30,9 +32,9 @@ class Agent():
         self.memory = ReplayMemory()
 
         # Create the policy net and the target net
-        self.policy_net = DQN(action_size)
+        self.policy_net = Dueling_DQN(action_size)
         self.policy_net.to(device)
-        self.target_net = DQN(action_size)
+        self.target_net = Dueling_DQN(action_size)
         self.target_net.to(device)
 
         self.optimizer = optim.Adam(params=self.policy_net.parameters(), lr=learning_rate)
@@ -63,8 +65,10 @@ class Agent():
 
     # pick samples randomly from replay memory (with batch_size)
     def train_policy_net(self, frame):
-        if self.epsilon > self.epsilon_min:
-            self.epsilon -= self.epsilon_decay
+        if self.epsilon > self.epsilon_middle:
+            self.epsilon -= self.epsilon_first_decay
+        elif self.epsilon > self.epsilon_min:
+            self.epsilon -= self.epsilon_last_decay
 
         mini_batch = self.memory.sample_mini_batch(frame)
         mini_batch = np.array(mini_batch).transpose()
@@ -83,17 +87,21 @@ class Agent():
         dones = torch.Tensor(dones.astype(np.bool)).to(device)
 
 
+        state_q = self.policy_net(states).gather(1, actions.unsqueeze(1)).squeeze(1)
+
         # Compute Q(s_t, a) - Q of the current state
         ### CODE ####
-        state_q = self.policy_net(states).gather(1, actions.unsqueeze(1)).squeeze(1)
-        
+        next_state_q = self.policy_net(next_states)
+        max_q, arg_q = next_state_q.data.cpu().max(1)
+        arg_q = arg_q.to(device)
+
         # Compute Q function of next state
         ### CODE ####
-        next_state_q = self.target_net(next_states).detach().max(1)[0]
+        double_q = self.target_net(next_states).gather(1, arg_q.unsqueeze(1)).squeeze(1)
         
         # Find maximum Q-value of action at next state from target net
         ### CODE ####
-        expected_q = rewards + next_state_q * self.discount_factor * (1 - dones)
+        expected_q = rewards + double_q * self.discount_factor * (1 - dones)
         
         # Compute the Huber Loss
         ### CODE ####
