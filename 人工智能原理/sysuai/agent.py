@@ -44,7 +44,9 @@ class Agent():
         self.update_target_net()
 
         if self.load_model:
-            self.policy_net = torch.load('save_model/breakout_ddqn_duel_40')
+            self.policy_net = torch.load('save_model/breakout_ddqn_duel_51')
+            self.target_net = torch.load('save_model/breakout_ddqn_duel_51')
+            print("load model")
 
     # after some time interval update the target net to be same with policy net
     def update_target_net(self):
@@ -108,7 +110,6 @@ class Agent():
             # Compute Q function of next state
             next_state_q = self.target_net(next_states).detach().max(1)[0]
 
-            # Find maximum Q-value of action at next state from target net
             expected_q = rewards + double_q * self.discount_factor * (1 - dones)
         
         # Compute the Huber Loss

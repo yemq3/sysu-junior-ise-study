@@ -25,7 +25,8 @@ state_size = env.observation_space.shape
 action_size = 4
 rewards, episodes = [], []
 
-agent = Agent(action_size)
+agent = Agent(action_size, use_ddqn=True, load_model=True)
+agent.epsilon = 0.01
 evaluation_reward = deque(maxlen=evaluation_reward_length)
 frame = 0
 memory_size = 0
@@ -37,7 +38,6 @@ for e in range(EPISODES):
 
     history = np.zeros([5, 84, 84], dtype=np.uint8)
     step = 0
-    d = False
     state = env.reset()
     life = number_lives
     for _ in range(random.randint(1, 10)):
@@ -80,7 +80,7 @@ for e in range(EPISODES):
             rewards.append(np.mean(evaluation_reward))
             episodes.append(e)
             pylab.plot(episodes, rewards, 'b')
-            pylab.savefig("./save_graph/breakout_ddqn_2.png")
+            pylab.savefig("./save_graph/breakout_ddqn_1e-5.png")
 
         if done:
             evaluation_reward.append(score)
