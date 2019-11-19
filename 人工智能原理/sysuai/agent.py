@@ -110,7 +110,7 @@ class Agent():
             # Compute Q function of next state
             next_state_q = self.target_net(next_states).detach().max(1)[0]
 
-            expected_q = rewards + double_q * self.discount_factor * (1 - dones)
+            expected_q = rewards + next_state_q * self.discount_factor * (1 - dones)
         
         # Compute the Huber Loss
         loss = F.smooth_l1_loss(state_q, expected_q)
