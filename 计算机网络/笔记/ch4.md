@@ -44,6 +44,29 @@
 
 ## IP
 
-### IP datagram
+### IPv4 datagram
 
 ![image-20191113093409624](ch4.assets/image-20191113093409624.png)
+
+### IPv4 Datagram Fragmentation & Reassembly
+
+MTU(maximum transmission unit)：物理层中能传输的最大数据大小
+
+数据包被发送时会被分片，高MTU链路到低MTU链路，数据包会继续进行分包（对碎片进行分包而不是重新分包），低MTU到高MTU则不做处理
+
+![image-20191120082239442](ch4.assets/image-20191120082239442.png)
+
+**分片例子**，每个碎片有20bytes的报头，每个报头记录偏移的字节数
+
+![image-20191120082656978](ch4.assets/image-20191120082656978.png)
+
+###  IPv4 Addressing
+
+IP地址与子网掩码
+
+### DHCP
+
+
+
+1. 课上ppt讲过的内容
+2. 第四、六、七章很重要，其中第六章占50%
