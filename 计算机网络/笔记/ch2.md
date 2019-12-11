@@ -2,6 +2,8 @@
 
 ### Application architectures
 
+两种应用架构：
+
 - client-server
 - peer-to-peer (P2P)
 
@@ -134,12 +136,25 @@ Two types of HTTP messages：
 
 ## DNS
 
+DNS 服务负责将域名转换为IP地址，一个域名的层级如下：
+
+>主机名.次级域名.顶级域名.根域名
+>host.sld.tld.root
+
+DNS 服务根据域名的层级进行分级查询，如下图
+
+![image-20191211090800508](ch2.assets/image-20191211090800508.png)
+
 ### Type
 
-- A
-- NS
-- CNAME
-- MX
+- A（Address）：返回域名指向的IP地址
+- NS（Name Server）：返回保存下一级域名信息的服务器地址。该记录只能设置为域名，不能设置为IP地址
+- CNAME（Canonical Name）：返回另一个域名，即当前查询的域名是另一个域名的跳转
+- MX（Mail eXchange）：返回接收电子邮件的服务器地址
+
+### TTL
+
+附带在DNS信息中，在TTL时间内不需要重复查询
 
 ## P2P
 
@@ -149,6 +164,10 @@ Two types of HTTP messages：
 
 - file divided into 256Kb chunks
 - peers in torrent send/receive file chunks
+
+
+
+---
 
 ## Video streaming and content distribution networks(CDNs)
 
