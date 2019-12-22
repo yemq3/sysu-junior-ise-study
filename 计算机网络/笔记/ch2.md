@@ -1,4 +1,6 @@
-## Principles of network applications
+# Chapter 2 Application Layer
+
+## Principles of network applications（重点）
 
 ### Application architectures
 
@@ -55,7 +57,7 @@ process sends/receives messages to/from its socket
 - No Congestion control
 - Connection-less
 
-## Web abd HTTP
+## Web abd HTTP（重点）
 
 - Web page consists of objects
 - each object is addressable by a URL
@@ -134,7 +136,7 @@ Two types of HTTP messages：
 
 ## Electronic mail
 
-## DNS
+## DNS（重点）
 
 DNS 服务负责将域名转换为IP地址，一个域名的层级如下：
 
@@ -188,5 +190,5 @@ Client can determines：
 
 CDN：stores copies of content at CDN nodes
 
-## Socket Programming with UDP and TCP
+## Socket Programming with UDP and TCP（重点）
 
