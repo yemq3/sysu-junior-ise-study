@@ -64,11 +64,11 @@ while (true){
 
 ```c
 while (true) {
-    wait(rw mutex);
+    wait(rw_mutex);
     ... 
         /* writing is performed */ 
     ... 
-    signal(rw mutex);
+    signal(rw_mutex);
 }
 
 ```
