@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.6.1)  2 JUN 2020 17:33
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.6.1)  4 JUN 2020 22:52
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -322,18 +322,18 @@ Package CJKpunct Info: use punctuation spaces for family 'rm' with punctstyle (q
 
 ] (./assignment1.aux) ) 
 Here is how much of TeX's memory you used:
- 4379 strings out of 480608
- 82275 string characters out of 5907537
+ 4402 strings out of 480608
+ 82614 string characters out of 5907537
  314239 words of memory out of 5000000
- 20133 multiletter control sequences out of 15000+600000
- 541355 words of font info for 56 fonts, out of 8000000 for 9000
+ 20148 multiletter control sequences out of 15000+600000
+ 542435 words of font info for 60 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  46i,7n,52p,492b,471s stack positions out of 5000i,500n,10000p,200000b,80000s
-<c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb>
-Output written on assignment1.pdf (1 page, 112490 bytes).
+<c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb>
+Output written on assignment1.pdf (1 page, 120927 bytes).
 PDF statistics:
- 104 PDF objects out of 1000 (max. 8388607)
- 67 compressed objects within 1 object stream
+ 121 PDF objects out of 1000 (max. 8388607)
+ 79 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 49 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 53 words of extra memory for PDF output out of 10000 (max. 10000000)
 
