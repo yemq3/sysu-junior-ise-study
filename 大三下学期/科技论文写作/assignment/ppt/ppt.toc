@@ -1,0 +1,4 @@
+\beamer@sectionintoc {1}{介绍}{3}{0}{1}
+\beamer@sectionintoc {2}{文献搜索}{6}{0}{2}
+\beamer@sectionintoc {3}{文献分类}{11}{0}{3}
+\beamer@sectionintoc {4}{未来方向}{13}{0}{4}
