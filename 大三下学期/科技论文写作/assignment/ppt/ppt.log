@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.6.1)  7 JUN 2020 23:17
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.6.1)  8 JUN 2020 22:58
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -730,13 +730,7 @@ Package datetime Info: No datetime.cfg file found, using default settings on inp
 LaTeX Info: Redefining \today on input line 736.
 \dt@a=\toks46
 \dt@b=\toks47
-) (c:/texlive/2020/texmf-dist/tex/latex/beamer/beamerthemeMadrid.sty (c:/texlive/2020/texmf-dist/tex/latex/beamer/beamercolorthemewhale.sty) (c:/texlive/2020/texmf-dist/tex/latex/beamer/beamercolorthemeorchid.sty) (c:/texlive/2020/texmf-dist/tex/latex/beamer/beamerinnerthemerounded.sty) (c:/texlive/2020/texmf-dist/tex/latex/beamer/beamerouterthemeinfolines.sty)) (c:/texlive/2020/texmf-dist/tex/latex/beamer/beamercolorthemedolphin.sty)
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                \hskip 10.95pt
-(hyperref)                replaced by space on input line 17.
-
-(./ppt.aux)
+) (c:/texlive/2020/texmf-dist/tex/latex/beamer/beamerthemeMadrid.sty (c:/texlive/2020/texmf-dist/tex/latex/beamer/beamercolorthemewhale.sty) (c:/texlive/2020/texmf-dist/tex/latex/beamer/beamercolorthemeorchid.sty) (c:/texlive/2020/texmf-dist/tex/latex/beamer/beamerinnerthemerounded.sty) (c:/texlive/2020/texmf-dist/tex/latex/beamer/beamerouterthemeinfolines.sty)) (c:/texlive/2020/texmf-dist/tex/latex/beamer/beamercolorthemedolphin.sty) (./ppt.aux)
 \openout1 = `ppt.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 22.
@@ -959,46 +953,45 @@ File: ./figure/fl-tran.png Graphic file (type bmp)
 ]
 File: ./figure/2.png Graphic file (type bmp)
 <./figure/2.png>
-
-Overfull \vbox (16.95177pt too high) detected at line 115
- []
-
-[13
+ [13
 
 ]
 File: ./figure/3.png Graphic file (type bmp)
 <./figure/3.png>
-
-Overfull \vbox (19.38898pt too high) detected at line 123
- []
-
-[14
+ [14
 
 ] [15
 
 ]
 File: ./figure/mubu.png Graphic file (type bmp)
 <./figure/mubu.png>
+ [16
 
-Overfull \vbox (19.39899pt too high) detected at line 140
- []
+] [17
 
-[16
+]
+File: ./figure/4.png Graphic file (type bmp)
+<./figure/4.png>
+ [18
 
-] (./ppt.toc) [17
+]
+File: ./figure/5.png Graphic file (type bmp)
+<./figure/5.png>
+ [19
 
-] [18
+] (./ppt.toc) [20
 
-] (./ppt.toc) [19
+]
+File: ./figure/6.png Graphic file (type bmp)
+<./figure/6.png>
+ [21
 
-] [20
-
-] (./ppt.bbl) [21
+] (./ppt.bbl) [22
 
 ]
 LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <24.88> not available
-(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 182.
- [22
+(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 195.
+ [23
 
 ]
 \tf@nav=\write8
@@ -1010,21 +1003,21 @@ LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <24.88> not available
 \tf@snm=\write10
 \openout10 = `ppt.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 184.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 184.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 197.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 197.
  (./ppt.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 184.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 184.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 197.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 197.
 Package rerunfilecheck Info: File `ppt.out' has not changed.
-(rerunfilecheck)             Checksum: 3AA99D0ED2FCD5EEF14D3CC6DE794F67;182.
+(rerunfilecheck)             Checksum: E3732D3A330E2E3F19352D68F9FC8608;135.
  ) 
 Here is how much of TeX's memory you used:
- 26208 strings out of 479418
- 541151 string characters out of 5888106
- 860329 words of memory out of 5000000
- 43135 multiletter control sequences out of 15000+600000
+ 26223 strings out of 479418
+ 541388 string characters out of 5888106
+ 860317 words of memory out of 5000000
+ 43149 multiletter control sequences out of 15000+600000
  548286 words of font info for 71 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  58i,19n,72p,998b,680s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on ppt.pdf (22 pages).
+Output written on ppt.pdf (23 pages).
