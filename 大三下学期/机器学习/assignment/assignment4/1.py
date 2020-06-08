@@ -24,8 +24,8 @@ class SVM:
             else:
                 plt.scatter(x[0], x[1], marker="_", c="b")
 
-        x = np.linspace(1,3)
-        y = 1 * x + 0
+        x = np.linspace(min(self.x[:,0])-1,max(self.x[:,1])+1)
+        y = self.w * x + self.b
         plt.plot(x, y)
 
         plt.xlabel('x')
@@ -38,21 +38,8 @@ class SVM:
 
 
 
-# positive = np.array([[1,2], [2,3], [3,3]])
-# negative = np.array([[2,1], [3,2]])
-
-# plt.scatter(positive[:,0], positive[:,1], marker="+")
-# plt.scatter(negative[:,0], negative[:,1], marker="_")
-
-# x = np.linspace(1,3)
-# y = 1 * x + 0
-# plt.plot(x, y)
-# plt.xlabel('x')
-# plt.ylabel('y')
-# plt.show()
-
 X = np.array([[1,2], [2,3], [3,3], [2,1], [3,2]])
-Y = np.array([1, 1, 1, 0, 0])
+Y = np.array([1, 1, 1, -1, -1])
 
 svm = SVM()
 svm.fit(X,Y)
