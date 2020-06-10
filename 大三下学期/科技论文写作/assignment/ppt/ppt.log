@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.6.1)  9 JUN 2020 14:50
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.6.1)  10 JUN 2020 21:48
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -960,26 +960,26 @@ File: ./figure/3.png Graphic file (type bmp)
 <./figure/3.png>
  [14
 
-] [15
-
 ]
 File: ./figure/mubu.png Graphic file (type bmp)
 <./figure/mubu.png>
- [16
+ [15
 
-] [17
+] [16
 
 ]
 File: ./figure/4.png Graphic file (type bmp)
 <./figure/4.png>
- [18
+ [17
 
 ]
 File: ./figure/5.png Graphic file (type bmp)
 <./figure/5.png>
- [19
+ [18
 
-] (./ppt.toc) [20
+] (./ppt.toc) [19
+
+] [20
 
 ]
 File: ./figure/6.png Graphic file (type bmp)
@@ -991,10 +991,16 @@ File: ./figure/6.png Graphic file (type bmp)
 ] [23
 
 
+] [24
+
+
+] [25
+
+
 ]
 LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <24.88> not available
-(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 195.
- [24
+(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 200.
+ [26
 
 ]
 \tf@nav=\write8
@@ -1006,21 +1012,21 @@ LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <24.88> not available
 \tf@snm=\write10
 \openout10 = `ppt.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 197.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 197.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 202.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 202.
  (./ppt.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 197.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 197.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 202.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 202.
 Package rerunfilecheck Info: File `ppt.out' has not changed.
-(rerunfilecheck)             Checksum: E3732D3A330E2E3F19352D68F9FC8608;135.
+(rerunfilecheck)             Checksum: 591C128AAAEDBE8BAAB1682D4AF743CE;144.
  ) 
 Here is how much of TeX's memory you used:
- 26231 strings out of 479418
- 541506 string characters out of 5888106
- 865286 words of memory out of 5000000
- 43157 multiletter control sequences out of 15000+600000
+ 26238 strings out of 479418
+ 540920 string characters out of 5888106
+ 874535 words of memory out of 5000000
+ 43164 multiletter control sequences out of 15000+600000
  548286 words of font info for 71 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  58i,19n,72p,998b,680s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on ppt.pdf (24 pages).
+Output written on ppt.pdf (26 pages).

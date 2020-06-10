@@ -123,15 +123,6 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{了解定义及相关问题}
-	\begin{itemize}
-		\item 什么是联邦学习？
-		\item 联邦学习有哪些核心问题？
-		\item 对于这些核心问题，解决方案有哪些？研究方向是什么？
-	\end{itemize}
-\end{frame}
-
-\begin{frame}
 	\frametitle{整理脉络}
 	\begin{figure}
 		\centering
@@ -167,20 +158,34 @@
 	\end{figure}
 \end{frame}
 
-\section{文献阅读}
+\section{文献整理及阅读}
 \begin{frame}
 	\tableofcontents[currentsection]
 \end{frame} 
 
+\begin{frame}
+	\frametitle{文献整理}
+	按使用的方法整理各类文献，记下文献提出的算法，使用的模型
+	\begin{table}[]
+	\begin{tabular}{|l|l|l|}
+	\hline
+							& Works                                                                                                                                                       & Idea                                    \\ \hline
+	Gradient quantization   & \begin{tabular}[c]{@{}l@{}}Wen et al.\cite{Wen}\\ Seide et al.\cite{Seide2014}\\ Zhou et al.\cite{Zhou}\end{tabular}                                        & \begin{tabular}[c]{@{}l@{}}将网络的权重或梯度\\ 由32 bits float量化为\\ 16bits甚至1bit\end{tabular} \\ \hline
+	Gradient sparsification & \begin{tabular}[c]{@{}l@{}}Storm\cite{International}\\ Dryden et al.\cite{Dryden2016}\\ Aji \& Heafielf\cite{Aji2017}\\ Chen et al.\cite{Chen}\end{tabular} & 通过算法将部分梯度剔除                             \\ \hline
+	\end{tabular}
+	\end{table}
+\end{frame}
+
 
 \begin{frame}
 	\frametitle{文献阅读}
-	按使用的方法整理各类文献，记下文献提出的算法，使用的模型
+	使用Mendeley整理文献，生成bib文献库
 	\begin{figure}
 		\centering
 		\includegraphics[height=0.5\textheight]{./figure/6.png}
 	\end{figure}
 \end{frame}
+
 
 
 \begin{frame}[allowframebreaks]
