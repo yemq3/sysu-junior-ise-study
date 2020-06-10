@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.6.1)  5 JUN 2020 18:41
-=======
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.6.1)  4 JUN 2020 22:52
->>>>>>> ef0150402c672de95fb49edbb0e20426658c1901
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.6.1)  10 JUN 2020 22:14
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -314,35 +310,33 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <8> on input line 9.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 9.
- (./assignment1.bbl) [1
 
 
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 19.
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 20.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 20.
+(./assignment1.bbl [1
+
+
+]
+Overfull \hbox (102.947pt too wide) in paragraph at lines 72--78
+\TU/lmr/m/n/9 https://www.aaai.org/ocs/index.php/AAAI/AAAI18/paper/viewPaper/16859 
+ []
+
+) [2
 
 ] (./assignment1.aux) ) 
 Here is how much of TeX's memory you used:
-<<<<<<< HEAD
- 6425 strings out of 479418
- 188383 string characters out of 5888106
- 465148 words of memory out of 5000000
- 23880 multiletter control sequences out of 15000+600000
- 535356 words of font info for 56 fonts, out of 8000000 for 9000
+ 6464 strings out of 479418
+ 190041 string characters out of 5888106
+ 472148 words of memory out of 5000000
+ 23914 multiletter control sequences out of 15000+600000
+ 535380 words of font info for 59 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 56i,7n,68p,364b,310s stack positions out of 5000i,500n,10000p,200000b,80000s
-=======
- 4402 strings out of 480608
- 82614 string characters out of 5907537
- 314239 words of memory out of 5000000
- 20148 multiletter control sequences out of 15000+600000
- 542435 words of font info for 60 fonts, out of 8000000 for 9000
- 1141 hyphenation exceptions out of 8191
- 46i,7n,52p,492b,471s stack positions out of 5000i,500n,10000p,200000b,80000s
-<c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb>
-Output written on assignment1.pdf (1 page, 120927 bytes).
-PDF statistics:
- 121 PDF objects out of 1000 (max. 8388607)
- 79 compressed objects within 1 object stream
- 0 named destinations out of 1000 (max. 500000)
- 53 words of extra memory for PDF output out of 10000 (max. 10000000)
->>>>>>> ef0150402c672de95fb49edbb0e20426658c1901
+ 56i,14n,68p,364b,324s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on assignment1.pdf (1 page).
+Output written on assignment1.pdf (2 pages).

@@ -1,0 +1,39 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+\usepackage[UTF8]{ctex}
+\usepackage{cite}
+
+\begin{document}
+    \title{联邦学习中的通信优化}
+    \author{叶茂青，王珺}
+
+    \maketitle
+    \begin{abstract}
+    随着机器学习的不断发展，机器学习所需要的数据量也不断增加，但客户对于数据隐私的需要，使得机器学习所需的数据获取难度很高，联邦学习试图在保护用户数据的同时，建立出能满足用户需求的模型。但大规模的联邦学习训练对带宽要求极高，对于个人设备，高昂的通信成本更是限制了复杂模型的使用，因此，提高联邦学习中客户端与服务器端的通信效率极为重要。本文总结了在联邦学习中常用的通信优化方法。
+    \end{abstract}
+    
+    \section{联邦学习的介绍}
+    xxx
+
+    \section{梯度压缩}
+    针对
+    \begin{table}[]
+    \begin{tabular}{|l|l|l|}
+    \hline
+                            & Works        \\ \hline
+    Gradient quantization   & \begin{tabular}[c]{@{}l@{}}Wen et al.\cite{Wen}\\ Seide et al.\cite{Seide2014}\\ Zhou et al.\cite{Zhou}\end{tabular}                                         \\ \hline
+    Gradient sparsification & \begin{tabular}[c]{@{}l@{}}Storm\cite{International}\\ Dryden et al.\cite{Dryden2016}\\ Aji \& Heafielf\cite{Aji2017}\\ Chen et al.\cite{Chen}\end{tabular} \\ \hline
+    \end{tabular}
+    \end{table}
+
+    \subsection{Gradient quantization}
+    Gradient quantization的思路主要是xxx
+
+    \subsection{Gradient sparsification}
+    Gradient sparsification的思路主要是xxx
+
+
+    {\small
+        \bibliographystyle{IEEEtran} 
+        \bibliography{assignment1}
+    }
+\end{document}
