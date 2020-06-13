@@ -17,8 +17,8 @@ class SVM:
         self.alpha = np.matrix(np.zeros((m,1))) # 拉格朗日乘子
         self.simplified_smo()
         self.w = self.computeW()
-        print("w = ", self.w)
-        print("b = ", self.b)
+        # print("w = ", self.w)
+        # print("b = ", self.b)
 
     def predict(self, x):
         return np.sign(np.dot(self.w, np.array(x)) + self.b)
@@ -51,12 +51,22 @@ class SVM:
         plt.show()
 
 
-    def selectJ(self, i, m):
+    def selectJRand(self, i, m):
         # 选定alpha_i后随机选定另外一个alpha_j
         j = i
         while j==i:
             j = random.randint(0,m-1)
         return j
+    
+    def selectJ(self, i, m):
+        # 选择|Ei-Ej|最大的
+        ei = self.computeEi(i)
+        best_value = -1
+        for j in range(m):
+            if abs(ei-self.computeEi(j,self.b)) > best_value:
+                best_index = j
+                best_value = abs(ei-self.computeEi(j,self.b))
+        return best_index
 
     def findBounds(self,i,j):
         if self.y[i] != self.y[j]:
@@ -79,16 +89,16 @@ class SVM:
     def simplified_smo(self):
         iters = 0
         max_iter = 100
-        b = 0
+        self.b = 0
         m, n = np.shape(self.x)
         tol = 1e-3
         while iters < max_iter:
             num_changed_alphas = 0
             for i in range(m):
-                ei = self.computeEi(i, b)
+                ei = self.computeEi(i)
                 if (self.y[i] * ei < -tol and self.alpha[i] < self.C) or (self.y[i] * ei > tol and self.alpha[i]> 0 ):
-                    j = self.selectJ(i, m)
-                    ej = self.computeEi(j, b)
+                    j = self.selectJRand(i, m)
+                    ej = self.computeEi(j)
                     old_alphai = self.alpha[i].copy()
                     old_alphaj = self.alpha[j].copy()
                     L, H = self.findBounds(i, j)
@@ -102,23 +112,22 @@ class SVM:
                     if abs(self.alpha[j] - old_alphaj) < 1e-5:
                         continue
                     self.alpha[i] = self.alpha[i] + self.y[i] * self.y[j] * (old_alphaj - self.alpha[j])
-                    b1 = b - ei - self.y[i] * (self.alpha[i] - old_alphai) * self.kernel(i,i) - self.y[j] * (self.alpha[j] - old_alphaj) * self.kernel(j,j)
-                    b2 = b - ej - self.y[i] * (self.alpha[i] - old_alphai) * self.kernel(i,j) - self.y[j] * (self.alpha[j] - old_alphaj) * self.kernel(j,j)
+                    b1 = self.b - ei - self.y[i] * (self.alpha[i] - old_alphai) * self.kernel(i,i) - self.y[j] * (self.alpha[j] - old_alphaj) * self.kernel(j,j)
+                    b2 = self.b - ej - self.y[i] * (self.alpha[i] - old_alphai) * self.kernel(i,j) - self.y[j] * (self.alpha[j] - old_alphaj) * self.kernel(j,j)
                     if 0 < self.alpha[i] < self.C:
-                        b = b1
+                        self.b = b1
                     elif 0 < self.alpha[j] < self.C:
-                        b = b2
+                        self.b = b2
                     else:
-                        b = (b1+b2)/2
+                        self.b = (b1+b2)/2
                     num_changed_alphas += 1
             if num_changed_alphas == 0:
                 iters += 1
             else:
                 iters = 0
-        self.b = b
 
-    def computeEi(self, i, b):
-        fxi = np.multiply(self.alpha, self.y).T * (self.x*self.x[i,:].T) + b
+    def computeEi(self, i):
+        fxi = np.multiply(self.alpha, self.y).T * (self.x*self.x[i,:].T) + self.b
         ei = fxi - self.y[i]
         return ei
 
@@ -134,6 +143,15 @@ class SVM:
 X = np.array([[1,2], [2,3], [3,3], [2,1], [3,2]])
 Y = np.array([1, 1, 1, -1, -1])
 
-svm = SVM(C=2)
+# hisw = []
+# hisb = []
+# for _ in range(100):
+#     svm = SVM(C=1)
+#     svm.fit(X,Y)
+#     hisb.append(svm.b)
+# print(hisb)
+# print(max(hisb) - min(hisb))
+
+svm = SVM(C=10)
 svm.fit(X,Y)
 svm.visualize()
