@@ -1,0 +1,2 @@
+\beamer@sectionintoc {1}{什么是兼容}{3}{0}{1}
+\beamer@sectionintoc {2}{常见的Windows和Linux之间的行为差异}{5}{0}{2}
