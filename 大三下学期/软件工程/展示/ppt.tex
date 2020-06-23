@@ -11,6 +11,13 @@
 \usepackage{hyperref}
 \usepackage{listings}
 \usepackage{xcolor}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=blue,
+	citecolor = black,      
+	urlcolor=blue,
+}
 
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
@@ -129,7 +136,15 @@
 
 \begin{frame}
 	\frametitle{换行符}
-	Windows采用CRLF为换行符，而Linux采用LF为换行符
+	Windows采用CRLF为换行符，而Linux采用LF为换行符，解决方案：
+	\begin{itemize}
+		\item 用二进制读写
+		\item 在写文件时设定换行符
+	\end{itemize}
+	\begin{figure}
+		\centering
+		\includegraphics[width=\textwidth]{./figure/3.png}
+	\end{figure}
 \end{frame}
 
 \begin{frame}
@@ -156,6 +171,17 @@
 			在Windows中应该显式的进行传递或使用共享内存
 		\end{column}
 	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{参考文献}
+	\href{https://stackoverflow.com/questions/6596617/python-multiprocess-diff-between-windows-and-linux}{multiprocessing - Python Multiprocess diff between Windows and Linux - Stack Overflow}\\
+	~\\
+	\href{https://docs.microsoft.com/zh-cn/archive/blogs/larryosterman/why-is-the-dos-path-character}{Why is the DOS path character ""?}\\
+	~\\
+	\href{https://devblogs.microsoft.com/oldnewthing/20040318-00/?p=40193}{Why is the line terminator CR+LF?}\\
+	~\\
+	\href{https://docs.python.org/2/library/multiprocessing.html}{python multiprocessing guidelines}
 \end{frame}
 
 \begin{frame}{}

@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.6.1)  22 JUN 2020 12:16
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.6.1)  23 JUN 2020 11:48
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -147,11 +147,11 @@ File: xetex.def 2017/06/24 v5.0h Graphics/color driver for xetex
 \Gin@req@width=\dimen168
 )
 
-Package fontspec Info: Could not resolve font "SimSun/BI" (it probably doesn't
+Package fontspec Info: Could not resolve font "SimSun/I" (it probably doesn't
 (fontspec)             exist).
 
 
-Package fontspec Info: Could not resolve font "SimSun/B" (it probably doesn't
+Package fontspec Info: Could not resolve font "SimSun/BI" (it probably doesn't
 (fontspec)             exist).
 
 
@@ -160,7 +160,7 @@ Package fontspec Info: Could not resolve font "SimSun/I" (it probably doesn't
 
 
 Package fontspec Info: Font family 'SimSun(0)' created for font 'SimSun' with
-(fontspec)             options [Script={CJK}].
+(fontspec)             options [Script={CJK},AutoFakeBold={0.25}].
 (fontspec)              
 (fontspec)              This font family consists of the following NFSS
 (fontspec)             series/shapes:
@@ -168,6 +168,9 @@ Package fontspec Info: Font family 'SimSun(0)' created for font 'SimSun' with
 (fontspec)             - 'normal' (m/n) with NFSS spec.:
 (fontspec)             <->"SimSun/OT:script=hani;language=dflt;"
 (fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
+(fontspec)             - 'bold' (b/n) with NFSS spec.:
+(fontspec)             <->"SimSun/OT:script=hani;language=dflt;embolden=0.25;"
+(fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.: 
 
 
 Package fontspec Info: Font family 'TimesNewRoman(0)' created for font 'Times
@@ -342,14 +345,17 @@ Overfull \hbox (0.7828pt too wide) in paragraph at lines 33--33
 
 File: figure/spp.png Graphic file (type bmp)
 <figure/spp.png>
-[2] [3] (./report.bbl [4]) [5] (./report.aux) ) 
+[2] [3] [4]
+File: figure/ssd.png Graphic file (type bmp)
+<figure/ssd.png>
+ [5] (./report.bbl [6]) [7] (./report.aux) ) 
 Here is how much of TeX's memory you used:
- 5096 strings out of 479418
- 153328 string characters out of 5888106
- 458324 words of memory out of 5000000
- 22583 multiletter control sequences out of 15000+600000
- 536227 words of font info for 66 fonts, out of 8000000 for 9000
+ 5132 strings out of 479418
+ 154988 string characters out of 5888106
+ 459425 words of memory out of 5000000
+ 22616 multiletter control sequences out of 15000+600000
+ 536235 words of font info for 67 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 44i,6n,82p,289b,298s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 44i,8n,82p,542b,300s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on report.pdf (5 pages).
+Output written on report.pdf (7 pages).
