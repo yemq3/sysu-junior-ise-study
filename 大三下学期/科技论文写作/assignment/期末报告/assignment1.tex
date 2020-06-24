@@ -6,6 +6,8 @@
 \setCJKmonofont[AutoFakeSlant=0.25]{Noto Sans Mono CJK SC}
 
 \usepackage{cite}
+\usepackage{amsmath}
+\usepackage{amssymb}
 
 \begin{document}
     \title{联邦学习中的通信优化}
@@ -56,10 +58,35 @@
     \end{table}
 
     \subsection{Gradient quantization}
-    Gradient quantization的思路主要是将原来32位浮点数存储的梯度信息量化为更低准确度的存储表示。这方面的研究有Seide et al.\cite{Seide2014}提出的1-bit SGD、Alistarh et al.\cite{Alistarh}提出的QSGD、Wen et al.\cite{Wen}提出的TernGrad等
+    Gradient quantization的思路主要是将原来32位浮点数存储的梯度信息量化为更低准确度的存储表示。这方面的研究有Seide et al.\cite{Seide2014}提出的1-bit SGD、Alistarh et al.\cite{Alistarh}提出的QSGD、Wen et al.\cite{Wen}提出的TernGrad、Zhou et al.\cite{Zhou}提出的DoReFa-Net、Storm et al.\cite{International}提出的xxx
+    
+    Gradient quantization的难点在于如何在压缩梯度后依然能保证网络的收敛，对此Seide et al.\cite{Seide2014}使用Error Feedback的方法，将每次的量化误差保存下来并再次反馈到量化函数中
+
+    虽然1-bit SGD在实验观察下依旧可以保持收敛，但在其他条件下的收敛性依旧存疑，Alistarh et al.\cite{Alistarh}提出的QSGD则用数学证明了其在任意函数下的收敛性，在实验的表现中，使用QSGD对梯度进行4Bit或8Bit量化，无论是在resnet还是lstm上的精度都和32BitSGD没有太大区别，同时实验也提出了卷积层对于量化的敏感性或许要更高。QSGD允许用户在通信量和训练时间进行权衡
+
+    Wen et al.\cite{Wen}提出的TernGrad将梯度为2Bit，使用-1,0,1三个值表示梯度。其数学表示为
+    \[
+        \tilde{\boldsymbol{g}}_{t}=\operatorname{ternarize}\left(\boldsymbol{g}_{t}\right)=s_{t} \cdot \operatorname{sign}\left(\boldsymbol{g}_{t}\right) \circ \boldsymbol{b}_{t}
+    \]
+    where
+    \[
+        s_{t} \triangleq \max \left(a b s\left(\boldsymbol{g}_{t}\right)\right) \triangleq\left\|\boldsymbol{g}_{t}\right\|_{\infty}
+    \]
+    其中$b_t$满足伯努利分布
+    \[
+        \left\{\begin{array}{l}
+        P\left(b_{t k}=1 \mid \boldsymbol{g}_{t}\right)=\left|g_{t k}\right| / s_{t} \\
+        P\left(b_{t k}=0 \mid \boldsymbol{g}_{t}\right)=1-\left|g_{t k}\right| / s_{t}
+        \end{array}\right.
+    \]
+    为了避免某些梯度过大导致绝大部分梯度被量化为0，作者引入layer-wise ternarizing，逐层的对梯度进行量化，同时对于不同层之间梯度方差的差异，作者引入gradient clipping，用方差信息对每一层的梯度进行裁剪。
+
+    作者使用在MNIST和CIFAR-10上训练的卷积网络进行验证，相比32BitSGD，使用TernGrad并没有减慢收敛的速度，且精度损失也在1\%以内。
 
     \subsection{Gradient sparsification}
     Gradient sparsification的思路主要是xxx
+    \cite{}
+    \cite{Lin2017}
 
 
     {\small

@@ -8,6 +8,7 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: assignment1.bib
+Warning--I didn't find a database entry for ""
 -- IEEEtran.bst version 1.14 (2015/08/26) by Michael Shell.
 -- http://www.michaelshell.org/tex/ieeetran/bibtex/
 -- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
@@ -15,47 +16,49 @@ Warning--missing institution in Wen
 Warning--missing institution in Seide2014
 Warning--missing institution in Zhou
 Warning--empty year in International
+Warning--missing institution in Alistarh
+Warning--empty journal in Lin2017
 
 Done.
-You've used 8 entries,
+You've used 10 entries,
             4087 wiz_defined-function locations,
-            880 strings with 9814 characters,
-and the built_in function-call counts, 5511 in all, are:
-= -- 416
-> -- 178
+            891 strings with 10315 characters,
+and the built_in function-call counts, 6562 in all, are:
+= -- 492
+> -- 220
 < -- 25
-+ -- 90
-- -- 37
-* -- 295
-:= -- 885
-add.period$ -- 17
-call.type$ -- 8
-change.case$ -- 8
++ -- 110
+- -- 47
+* -- 352
+:= -- 1067
+add.period$ -- 21
+call.type$ -- 10
+change.case$ -- 10
 chr.to.int$ -- 66
-cite$ -- 12
-duplicate$ -- 394
-empty$ -- 411
-format.name$ -- 45
-if$ -- 1217
+cite$ -- 16
+duplicate$ -- 476
+empty$ -- 489
+format.name$ -- 57
+if$ -- 1442
 int.to.chr$ -- 0
-int.to.str$ -- 8
-missing$ -- 87
-newline$ -- 61
-num.names$ -- 8
-pop$ -- 223
+int.to.str$ -- 10
+missing$ -- 109
+newline$ -- 71
+num.names$ -- 10
+pop$ -- 281
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 2
-skip$ -- 393
+skip$ -- 464
 stack$ -- 0
-substring$ -- 162
-swap$ -- 304
+substring$ -- 164
+swap$ -- 362
 text.length$ -- 3
 text.prefix$ -- 0
 top$ -- 5
-type$ -- 8
-warning$ -- 4
-while$ -- 20
-width$ -- 9
-write$ -- 109
-(There were 4 warnings)
+type$ -- 10
+warning$ -- 6
+while$ -- 22
+width$ -- 12
+write$ -- 130
+(There were 7 warnings)
