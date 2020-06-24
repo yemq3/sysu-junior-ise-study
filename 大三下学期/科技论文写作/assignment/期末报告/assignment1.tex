@@ -1,22 +1,52 @@
-\documentclass[10pt,twocolumn,letterpaper]{article}
-\usepackage[UTF8]{ctex}
+\documentclass[10pt,onecolumn,letterpaper]{article}
+
+\usepackage{xeCJK}
+\setCJKmainfont[AutoFakeSlant=0.25]{Noto Sans Mono CJK SC}
+\setCJKsansfont[AutoFakeSlant=0.25]{Noto Sans Mono CJK SC}
+\setCJKmonofont[AutoFakeSlant=0.25]{Noto Sans Mono CJK SC}
+
 \usepackage{cite}
 
 \begin{document}
     \title{联邦学习中的通信优化}
-    \author{叶茂青，王珺}
+    \author{17363092 叶茂青，17363079 王珺}
 
     \maketitle
     \begin{abstract}
-    随着机器学习的不断发展，机器学习所需要的数据量也不断增加，但客户对于数据隐私的需要，使得机器学习所需的数据获取难度很高，联邦学习试图在保护用户数据的同时，建立出能满足用户需求的模型。但大规模的联邦学习训练对带宽要求极高，对于个人设备，高昂的通信成本更是限制了复杂模型的使用，因此，提高联邦学习中客户端与服务器端的通信效率极为重要。本文总结了在联邦学习中常用的通信优化方法。
+        联邦学习的提出使得用户可以在保证隐私的同时贡献自己的数据，但高昂的通信成本限制了联邦学习的应用，本文总结了联邦学习针对网络梯度传输所做的各种优化。
     \end{abstract}
     
+    
+    \section{TODO}
+    problem that the research addresses
+
+    background information and relevant references
+
+    elements that validate the level of innovation of the research
+
+    conceptual model, methodology or procedure that the research takes into consideration
+
+    analysis and interpretation of the results achieved
+
+    strengths and weaknesses of the research, the insights demonstrated
+
+    implications for further research
+
+
     \section{联邦学习的介绍}
-    xxx
+    联邦学习的数学模型描述在2016年由McMahan et al.\cite{McMahan2016}提出，McMahan et al.同时也提出了联邦学习区别于分布式学习的四大难点：
+    \begin{itemize}
+        \item Non-IID
+        \item Unbalanced
+        \item Massively distributed
+        \item Limited communication
+    \end{itemize}
+    由于联邦学习的应用场景中，客户端多为个人设备，通信成本高且通信质量也不能保证
+
 
     \section{梯度压缩}
     针对
-    \begin{table}[]
+    \begin{table}[htb]
     \begin{tabular}{|l|l|l|}
     \hline
                             & Works        \\ \hline
@@ -26,7 +56,7 @@
     \end{table}
 
     \subsection{Gradient quantization}
-    Gradient quantization的思路主要是xxx
+    Gradient quantization的思路主要是将原来32位浮点数存储的梯度信息量化为更低准确度的存储表示。这方面的研究有Seide et al.\cite{Seide2014}提出的1-bit SGD、Alistarh et al.\cite{Alistarh}提出的QSGD、Wen et al.\cite{Wen}提出的TernGrad等
 
     \subsection{Gradient sparsification}
     Gradient sparsification的思路主要是xxx
@@ -34,6 +64,6 @@
 
     {\small
         \bibliographystyle{IEEEtran} 
-        \bibliography{assignment1}
+        \bibliography{assignment1.bib}
     }
 \end{document}

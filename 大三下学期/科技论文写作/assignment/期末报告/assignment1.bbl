@@ -21,6 +21,15 @@
 \providecommand{\BIBdecl}{\relax}
 \BIBdecl
 
+\bibitem{McMahan2016}
+\BIBentryALTinterwordspacing
+H.~B. McMahan, E.~Moore, D.~Ramage, S.~Hampson, and B.~A.~y. Arcas,
+  ``{Communication-Efficient Learning of Deep Networks from Decentralized
+  Data},'' \emph{Proceedings of the 20th International Conference on Artificial
+  Intelligence and Statistics, AISTATS 2017}, feb 2016. [Online]. Available:
+  \url{http://arxiv.org/abs/1602.05629}
+\BIBentrySTDinterwordspacing
+
 \bibitem{Wen}
 \BIBentryALTinterwordspacing
 W.~Wen, C.~Xu, F.~Yan, C.~Wu, Y.~Wang, Y.~Chen, and H.~Li, ``{TernGrad: Ternary
