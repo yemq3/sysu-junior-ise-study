@@ -30,19 +30,27 @@ H.~B. McMahan, E.~Moore, D.~Ramage, S.~Hampson, and B.~A.~y. Arcas,
   \url{http://arxiv.org/abs/1602.05629}
 \BIBentrySTDinterwordspacing
 
-\bibitem{Wen}
-\BIBentryALTinterwordspacing
-W.~Wen, C.~Xu, F.~Yan, C.~Wu, Y.~Wang, Y.~Chen, and H.~Li, ``{TernGrad: Ternary
-  gradients to reduce communication in distributed deep learning},'' Tech.
-  Rep., 2017. [Online]. Available: \url{https://github.com/wenwei202/terngrad}
-\BIBentrySTDinterwordspacing
-
 \bibitem{Seide2014}
 \BIBentryALTinterwordspacing
 F.~Seide, H.~Fu, J.~Droppo, G.~Li, and D.~Yu, ``{1-bit stochastic gradient
   descent and its application to data-parallel distributed training of speech
   DNNs},'' Tech. Rep., 2014. [Online]. Available:
   \url{https://www.isca-speech.org/archive/interspeech{\_}2014/i14{\_}1058.html}
+\BIBentrySTDinterwordspacing
+
+\bibitem{Alistarh}
+\BIBentryALTinterwordspacing
+D.~Alistarh, D.~Grubic, J.~Z. Li, R.~Tomioka, and M.~Vojnovic, ``{QSGD:
+  Communication-efficient SGD via gradient quantization and encoding},'' Tech.
+  Rep., 2017. [Online]. Available:
+  \url{http://papers.nips.cc/paper/6768-qsgd-communication-efficient-sgd-via-gradient-quantization-and-encoding}
+\BIBentrySTDinterwordspacing
+
+\bibitem{Wen}
+\BIBentryALTinterwordspacing
+W.~Wen, C.~Xu, F.~Yan, C.~Wu, Y.~Wang, Y.~Chen, and H.~Li, ``{TernGrad: Ternary
+  gradients to reduce communication in distributed deep learning},'' Tech.
+  Rep., 2017. [Online]. Available: \url{https://github.com/wenwei202/terngrad}
 \BIBentrySTDinterwordspacing
 
 \bibitem{Zhou}
@@ -70,6 +78,13 @@ N.~Dryden, T.~Moon, S.~A. Jacobs, and B.~{Van Essen}, ``{Communication
   [Online]. Available: \url{https://github.com/LLNL/lbann.}
 \BIBentrySTDinterwordspacing
 
+\bibitem{Lin2017}
+\BIBentryALTinterwordspacing
+Y.~Lin, S.~Han, H.~Mao, Y.~Wang, and W.~J. Dally, ``{Deep Gradient Compression:
+  Reducing the Communication Bandwidth for Distributed Training},'' dec 2017.
+  [Online]. Available: \url{http://arxiv.org/abs/1712.01887}
+\BIBentrySTDinterwordspacing
+
 \bibitem{Aji2017}
 A.~F. Aji and K.~Heafield, ``{Sparse communication for distributed gradient
   descent},'' in \emph{EMNLP 2017 - Conference on Empirical Methods in Natural
@@ -83,21 +98,6 @@ C.~Y. Chen, J.~Choi, D.~Brand, A.~Agrawal, W.~Zhang, and K.~Gopalakrishnan,
   distributed training},'' \emph{32nd AAAI Conference on Artificial
   Intelligence, AAAI 2018}, pp. 2827--2835, 2018. [Online]. Available:
   \url{https://www.aaai.org/ocs/index.php/AAAI/AAAI18/paper/viewPaper/16859}
-\BIBentrySTDinterwordspacing
-
-\bibitem{Alistarh}
-\BIBentryALTinterwordspacing
-D.~Alistarh, D.~Grubic, J.~Z. Li, R.~Tomioka, and M.~Vojnovic, ``{QSGD:
-  Communication-efficient SGD via gradient quantization and encoding},'' Tech.
-  Rep., 2017. [Online]. Available:
-  \url{http://papers.nips.cc/paper/6768-qsgd-communication-efficient-sgd-via-gradient-quantization-and-encoding}
-\BIBentrySTDinterwordspacing
-
-\bibitem{Lin2017}
-\BIBentryALTinterwordspacing
-Y.~Lin, S.~Han, H.~Mao, Y.~Wang, and W.~J. Dally, ``{Deep Gradient Compression:
-  Reducing the Communication Bandwidth for Distributed Training},'' dec 2017.
-  [Online]. Available: \url{http://arxiv.org/abs/1712.01887}
 \BIBentrySTDinterwordspacing
 
 \end{thebibliography}

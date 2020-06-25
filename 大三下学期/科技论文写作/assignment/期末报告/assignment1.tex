@@ -1,13 +1,17 @@
-\documentclass[10pt,onecolumn,letterpaper]{article}
+\documentclass[11pt,onecolumn,letterpaper]{article}
 
 \usepackage{xeCJK}
-\setCJKmainfont[AutoFakeSlant=0.25]{Noto Sans Mono CJK SC}
-\setCJKsansfont[AutoFakeSlant=0.25]{Noto Sans Mono CJK SC}
-\setCJKmonofont[AutoFakeSlant=0.25]{Noto Sans Mono CJK SC}
-
+\usepackage{indentfirst}
 \usepackage{cite}
 \usepackage{amsmath}
 \usepackage{amssymb}
+
+\setCJKmainfont{Noto Sans Mono CJK SC}
+\setCJKsansfont{Noto Sans Mono CJK SC}
+\setCJKmonofont{Noto Sans Mono CJK SC}
+\linespread{1.5}
+\setlength{\parindent}{2em}
+
 
 \begin{document}
     \title{联邦学习中的通信优化}
@@ -17,23 +21,6 @@
     \begin{abstract}
         联邦学习的提出使得用户可以在保证隐私的同时贡献自己的数据，但高昂的通信成本限制了联邦学习的应用，本文总结了联邦学习针对网络梯度传输所做的各种优化。
     \end{abstract}
-    
-    
-    \section{TODO}
-    problem that the research addresses
-
-    background information and relevant references
-
-    elements that validate the level of innovation of the research
-
-    conceptual model, methodology or procedure that the research takes into consideration
-
-    analysis and interpretation of the results achieved
-
-    strengths and weaknesses of the research, the insights demonstrated
-
-    implications for further research
-
 
     \section{联邦学习的介绍}
     联邦学习的数学模型描述在2016年由McMahan et al.\cite{McMahan2016}提出，McMahan et al.同时也提出了联邦学习区别于分布式学习的四大难点：
@@ -46,23 +33,16 @@
     由于联邦学习的应用场景中，客户端多为个人设备，通信成本高且通信质量也不能保证
 
 
-    \section{梯度压缩}
-    针对
-    \begin{table}[htb]
-    \begin{tabular}{|l|l|l|}
-    \hline
-                            & Works        \\ \hline
-    Gradient quantization   & \begin{tabular}[c]{@{}l@{}}Wen et al.\cite{Wen}\\ Seide et al.\cite{Seide2014}\\ Zhou et al.\cite{Zhou}\end{tabular}                                         \\ \hline
-    Gradient sparsification & \begin{tabular}[c]{@{}l@{}}Storm\cite{International}\\ Dryden et al.\cite{Dryden2016}\\ Aji \& Heafielf\cite{Aji2017}\\ Chen et al.\cite{Chen}\end{tabular} \\ \hline
-    \end{tabular}
-    \end{table}
+    \section{降低网络通讯量的方法}
 
     \subsection{Gradient quantization}
-    Gradient quantization的思路主要是将原来32位浮点数存储的梯度信息量化为更低准确度的存储表示。这方面的研究有Seide et al.\cite{Seide2014}提出的1-bit SGD、Alistarh et al.\cite{Alistarh}提出的QSGD、Wen et al.\cite{Wen}提出的TernGrad、Zhou et al.\cite{Zhou}提出的DoReFa-Net、Storm et al.\cite{International}提出的xxx
+    Gradient quantization的思路主要是将原来32位浮点数存储的梯度信息量化为更低准确度的存储表示。这方面的研究有Seide et al.\cite{Seide2014}提出的1-bit SGD、Alistarh et al.\cite{Alistarh}提出的QSGD、Wen et al.\cite{Wen}提出的TernGrad、Zhou et al.\cite{Zhou}提出的DoReFa-Net等
     
-    Gradient quantization的难点在于如何在压缩梯度后依然能保证网络的收敛，对此Seide et al.\cite{Seide2014}使用Error Feedback的方法，将每次的量化误差保存下来并再次反馈到量化函数中
+    Gradient quantization的难点在于如何在压缩梯度后依然能保证网络的收敛，
 
-    虽然1-bit SGD在实验观察下依旧可以保持收敛，但在其他条件下的收敛性依旧存疑，Alistarh et al.\cite{Alistarh}提出的QSGD则用数学证明了其在任意函数下的收敛性，在实验的表现中，使用QSGD对梯度进行4Bit或8Bit量化，无论是在resnet还是lstm上的精度都和32BitSGD没有太大区别，同时实验也提出了卷积层对于量化的敏感性或许要更高。QSGD允许用户在通信量和训练时间进行权衡
+    Seide et al.\cite{Seide2014}采用Error Feedback的方法，将每次的量化误差保存下来并再次反馈到量化函数中。虽然 1-bit SGD在实验观察下依旧可以保持收敛，但在其他条件下的收敛性依旧存疑。
+    
+    Alistarh et al.\cite{Alistarh}提出的QSGD则用数学证明了其在任意函数下的收敛性，在实验的表现中，使用QSGD对梯度进行4Bit或8Bit量化，无论是在resnet还是lstm上的精度都和32BitSGD没有太大区别，同时实验也提出了卷积层对于量化的敏感性或许要更高。QSGD适用于不同的量化程度，允许用户在通信量和训练时间进行权衡。
 
     Wen et al.\cite{Wen}提出的TernGrad将梯度为2Bit，使用-1,0,1三个值表示梯度。其数学表示为
     \[
@@ -79,14 +59,33 @@
         P\left(b_{t k}=0 \mid \boldsymbol{g}_{t}\right)=1-\left|g_{t k}\right| / s_{t}
         \end{array}\right.
     \]
-    为了避免某些梯度过大导致绝大部分梯度被量化为0，作者引入layer-wise ternarizing，逐层的对梯度进行量化，同时对于不同层之间梯度方差的差异，作者引入gradient clipping，用方差信息对每一层的梯度进行裁剪。
 
-    作者使用在MNIST和CIFAR-10上训练的卷积网络进行验证，相比32BitSGD，使用TernGrad并没有减慢收敛的速度，且精度损失也在1\%以内。
+    为了避免某些梯度过大导致绝大部分梯度被量化为0，作者引入layer-wise ternarizing，逐层的对梯度进行量化，同时对于不同层之间梯度方差的差异，作者引入gradient clipping，用方差信息对每一层的梯度进行裁剪。作者使用在MNIST和CIFAR-10上训练的卷积网络进行验证，相比32BitSGD，使用TernGrad并没有减慢收敛的速度，且精度损失也在1\%以内。
+
+    Zhou et al.\cite{Zhou}提出的DoReFa-Net不仅对梯度进行量化，也将网络中的权重进行量化，同时提出Bit Convolution Kernels用以训练网络，DoReFa-Net对权重也同时进行量化的策略，虽然使得网络所需的运算量明显下降，但在实验中使用AlexNet进行测试，可以明显观察到精度的下降。
+
+
 
     \subsection{Gradient sparsification}
-    Gradient sparsification的思路主要是xxx
-    \cite{}
-    \cite{Lin2017}
+    Gradient sparsification的想法建立在梯度稀疏性的假设上，只传输部分对权重影响大的梯度，从而减少发送的数据。这方面的研究有Strom\cite{International}、Dryden et al.\cite{Dryden2016}、Lin et al.\cite{Lin2017}、Aji \& Heafield\cite{Aji2017}、Chen et al.\cite{Chen}等
+
+    Gradient sparsification的难点主要有两点，1. 如何选择合适的阈值对梯度进行稀疏？直接设定阈值的方法虽然简单，但可能需要反复调试，且同一网络的各层也可能需要不同的阈值。设定比率的方法则会引入更多额外的计算，会降低模型训练的速度。2. 稀疏之后如何保证网络仍能收敛？几乎所有的方法都会保存下未发送的梯度，并以不同的方式反映到下一次的迭代中，以尽可能的保留梯度信息。
+
+    Strom\cite{International}同时运用了量化和稀疏的方法，只传送大于某一阈值的梯度，同时将梯度量化为1Bit，为了存储需要更新的梯度索引，用31Bit传输梯度的索引信息，同时使用了1-Bit SGD中提到的Error Feedback方法。
+
+    Dryden et al.\cite{Dryden2016}直接选取阈值对梯度进行选择时可能需要多次实验才能找到适合的阈值，Dryden et al.提出使用固定比例来选择梯度，发送网络中梯度绝对值前$\pi$大的正负梯度，但相比直接使用阈值进行稀疏，这样的方法会引入额外的计算时间。
+
+    Lin et al.\cite{Lin2017}使用的稀疏方法与之前类似，为了避免稀疏过程丢失大量梯度信息，会将没有超过阈值的梯度保存下来，直至其累加超过阈值才会被发送出去，同时也提出了一种对动量进行修正的方法，使得网络使用Momentum SGD进行训练时，更新的路径大致相同。
+
+    Aji \& Heafield\cite{Aji2017}提出的Gradient Dropping通过设定dropping rate进行梯度稀疏，为了尽可能多的保存信息依旧采用Error Feedback的思路，将上一轮迭代的残差加入到计算当中。使用比例的一大缺点是会引入额外的计算误差，为此Gradient Dropping使用0.1\%的梯度来计算近似阈值，Gradient Dropping还引入了Layer normalization规范各层的梯度范围，从而可以使用全局阈值对梯度进行稀疏。实验中使用卷积网络在MNIST上训练发现，在丢弃掉99\%的梯度后，模型的收敛速度和精度基本不受影响，继续提高丢弃率则会明显延长网络的训练时间。Layer normalization在卷积网络上没有什么作用，但在翻译任务上使用的LSTM则加快了收敛速度。实验也尝试了与梯度量化技术的结合，发现在更为复杂的LSTM模型上，1-Bit Quantization会过于激进，而2-Bit quantization对模型的影响较小。
+
+    Chen et al.\cite{Chen}提出的AdaComp，使用自适应的稀疏调节方法，将梯度根据网络的层级结构分入若干个桶中，统计每个桶中的最大值，如果上一轮梯度的残差加上当前梯度的两倍大于该最大值，则将该梯度量化后发送。在多个CNN网络和LSTM网络的实验下，AdaComp均保证了模型的精度和收敛速度。作者也尝试了将AdaComp和Adam优化器结合起来，在CNN网络训练的结果表明对模型并没有太大影响。
+
+
+    \section{未来方向}
+    对于梯度量化的研究，Alistarh et al.\cite{Alistarh}、Wen et al.\cite{Wen}已经从数学层面上证明了量化后的梯度依然可以使得网络收敛，但量化的程度似乎并没有研究可以参考，Aji \& Heafield\cite{Aji2017}在实验中表明对于不同的网络应该使用不同的量化策略，但至今也没有研究指出应该如何设定量化的程度，以及网络量化的极限是多少。
+
+    对于梯度稀疏化的研究表明在丢弃网络99\%以上的梯度后，模型依然能保持原有的精度和收敛速度，但目前在阈值选择上依旧有很多待研究的问题，直接选取阈值需要进行多次实验，且不同层间也可能需要选择不同阈值，Aji \& Heafield\cite{Aji2017}引入Layer normalization以保证使用全局阈值时模型的收敛速度，但同时也使得模型更为复杂。采用比例和自适应阈值的方法会引入很多额外的运算，如何平衡模型的复杂度依然是一个值得研究的问题。
 
 
     {\small
