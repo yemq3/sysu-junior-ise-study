@@ -30,6 +30,14 @@ H.~B. McMahan, E.~Moore, D.~Ramage, S.~Hampson, and B.~A.~y. Arcas,
   \url{http://arxiv.org/abs/1602.05629}
 \BIBentrySTDinterwordspacing
 
+\bibitem{Hard2018}
+\BIBentryALTinterwordspacing
+A.~Hard, K.~Rao, R.~Mathews, S.~Ramaswamy, F.~Beaufays, S.~Augenstein,
+  H.~Eichner, C.~Kiddon, and D.~Ramage, ``{Federated Learning for Mobile
+  Keyboard Prediction},'' nov 2018. [Online]. Available:
+  \url{http://arxiv.org/abs/1811.03604}
+\BIBentrySTDinterwordspacing
+
 \bibitem{Seide2014}
 \BIBentryALTinterwordspacing
 F.~Seide, H.~Fu, J.~Droppo, G.~Li, and D.~Yu, ``{1-bit stochastic gradient
@@ -98,6 +106,12 @@ C.~Y. Chen, J.~Choi, D.~Brand, A.~Agrawal, W.~Zhang, and K.~Gopalakrishnan,
   distributed training},'' \emph{32nd AAAI Conference on Artificial
   Intelligence, AAAI 2018}, pp. 2827--2835, 2018. [Online]. Available:
   \url{https://www.aaai.org/ocs/index.php/AAAI/AAAI18/paper/viewPaper/16859}
+\BIBentrySTDinterwordspacing
+
+\bibitem{Ba2016}
+\BIBentryALTinterwordspacing
+J.~L. Ba, J.~R. Kiros, and G.~E. Hinton, ``{Layer Normalization},'' jul 2016.
+  [Online]. Available: \url{http://arxiv.org/abs/1607.06450}
 \BIBentrySTDinterwordspacing
 
 \end{thebibliography}

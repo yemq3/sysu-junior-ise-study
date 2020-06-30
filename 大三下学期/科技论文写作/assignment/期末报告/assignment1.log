@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.6.1)  25 JUN 2020 23:34
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.6.1)  29 JUN 2020 15:28
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -8,8 +8,8 @@ entering extended mode
 LaTeX2e <2020-02-02> patch level 5
 L3 programming layer <2020-03-06> (c:/texlive/2020/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2019/12/20 v1.4l Standard LaTeX document class
-(c:/texlive/2020/texmf-dist/tex/latex/base/size11.clo
-File: size11.clo 2019/12/20 v1.4l Standard LaTeX file (size option)
+(c:/texlive/2020/texmf-dist/tex/latex/base/size12.clo
+File: size12.clo 2019/12/20 v1.4l Standard LaTeX file (size option)
 )
 \c@part=\count163
 \c@section=\count164
@@ -306,19 +306,19 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 20.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
-] [2] [3] [4] (./assignment1.bbl [5]
-Overfull \hbox (4.46498pt too wide) in paragraph at lines 96--102
-\TU/lmr/m/n/10 https://www.aaai.org/ocs/index.php/AAAI/AAAI18/paper/viewPaper/16859 
+] [2] [3] [4] (./assignment1.bbl [5] [6]
+Overfull \hbox (9.09395pt too wide) in paragraph at lines 104--110
+\TU/lmr/m/n/10.95 https://www.aaai.org/ocs/index.php/AAAI/AAAI18/paper/viewPaper/16859 
  []
 
-[6]) [7] (./assignment1.aux) ) 
+) [7] (./assignment1.aux) ) 
 Here is how much of TeX's memory you used:
- 5943 strings out of 479418
- 164288 string characters out of 5888106
+ 5954 strings out of 479418
+ 164415 string characters out of 5888106
  459847 words of memory out of 5000000
- 23407 multiletter control sequences out of 15000+600000
- 541509 words of font info for 83 fonts, out of 8000000 for 9000
+ 23415 multiletter control sequences out of 15000+600000
+ 542575 words of font info for 90 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 44i,12n,60p,555b,303s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 44i,12n,60p,565b,305s stack positions out of 5000i,500n,10000p,200000b,80000s
 
 Output written on assignment1.pdf (7 pages).
