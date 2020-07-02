@@ -19,11 +19,11 @@
 
     \maketitle
     \begin{abstract}
-        联邦学习的提出使得用户可以在保证隐私的同时贡献自己的数据，但高昂的通信成本限制了联邦学习的应用。本文总结了联邦学习中针对网络梯度传输所做的优化，并提出这一领域仍需解决的问题。
+        联邦学习指众多客户端在中心服务器的协调下进行机器学习任务，联邦学习可以让用户在保证隐私的同时贡献自己的数据，但高昂的通信成本限制了联邦学习的应用。本文总结了联邦学习中针对网络梯度传输所做的优化，并提出这一领域仍需解决的问题。
     \end{abstract}
 
     \section{联邦学习的介绍}
-    联邦学习的数学模型描述在2016年由McMahan et al.\cite{McMahan2016}提出，McMahan et al.同时也提出了联邦学习区别于分布式学习的四大难点：
+    联邦学习的数学模型描述在2016年由McMahan et al.\cite{McMahan2016}提出，区别于分布式学习，联邦学习的数据分散在各个客户端中，且出于对用户隐私的保护，在联邦学习中，数据不能发送给服务器，客户端只能传输对模型的更新信息。联邦学习的提出，有利于解决公司之间的数据壁垒，对个人来说，也可以避免自己的隐私泄露。不过联邦学习的这一特点也使得机器学习模型的训练变得困难，McMahan et al.\cite{McMahan2016}提出了联邦学习区别于分布式学习的四大难点：
     
     \begin{itemize}
         \item Non-IID
@@ -32,7 +32,7 @@
         \item Limited communication
     \end{itemize}
     
-    由于联邦学习的应用场景中，客户端多为个人设备，通信成本高且通信质量也不能保证，直接传输未经处理的梯度是不现实的。面对联邦学习中的这一问题，学者们提出了两种对梯度传输进行优化的方法，一是Gradient quantization，降低梯度传输的精度，二是Gradient sparsification，降低梯度传输的数量。2018年Google\cite{Hard2018}使用联邦学习训练手机键盘的预测模型中，便使用了一种量化策略，将模型压缩到1.4MB，使得用户可以快速的发送手机的梯度数据。
+    由于联邦学习的应用场景中，客户端多为个人设备，通信成本高且通信质量也不能保证，直接传输未经处理的梯度是不现实的。面对联邦学习中的这一问题，学者们提出了两种对梯度传输进行优化的方法，一是Gradient quantization，降低梯度传输的精度，二是Gradient sparsification，降低梯度传输的数量。2018年Google\cite{Hard2018}使用联邦学习训练手机键盘的预测模型中，便使用了一种量化策略，将模型压缩到1.4MB，使得用户可以快速发送手机上的梯度信息。
 
 
     \section{对于梯度传输的优化策略}
@@ -42,11 +42,11 @@
     
     Gradient quantization的难点在于如何在压缩梯度后依然能保证网络的收敛，以及如何选择合适的量化程度。
 
-    Seide et al.\cite{Seide2014}提出的1-bit SGD采用Error Feedback的方法，将每次的量化误差保存下来并再次反馈到量化函数中，这一方法在众多论文中，虽然 1-bit SGD在实验观察下依旧可以保持收敛，但在其他条件下的收敛性依旧存疑。
+    Seide et al.\cite{Seide2014}提出的1-bit SGD，将梯度量化为1-bit，为了保证模型的收敛，1-bit SGD中采用了Error Feedback的方法，将每次的量化误差保存下来并再次反馈到量化函数中，这一方法在之后的众多研究中均有体现，在实验观察下，1-bit SGD并没有过多的降低模型的精度和收敛速度，但后续的研究表明，对于一些复杂的网络，1-bit SGD采用的量化策略或许过于激进。
     
-    Alistarh et al.\cite{Alistarh}提出的QSGD则用数学证明了其在任意函数下的收敛性，在实验的表现中，使用QSGD对梯度进行4Bit或8Bit量化，无论是在resnet还是lstm上的精度都和32BitSGD没有太大区别，同时实验也提出了卷积层对于量化的敏感性或许要更高。QSGD适用于不同的量化程度，允许用户在通信量和训练时间进行权衡。
+    Alistarh et al.\cite{Alistarh}提出的QSGD则用数学证明了其在任意函数下的收敛性，在实验的表现中，使用QSGD对梯度进行4bits或8bits量化，无论是在resnet还是lstm上的精度都和32-bits SGD没有太大区别，同时实验也提出了卷积层对于量化的敏感性或许要更高。相比于1-bit SGD，QSGD适用于不同的量化程度，允许用户在通信量和训练时间进行权衡。
 
-    Wen et al.\cite{Wen}提出的TernGrad将梯度为2Bit，使用-1,0,1三个值表示梯度。其数学表示为
+    Wen et al.\cite{Wen}提出的TernGrad将梯度为2bits，使用-1,0,1三个值表示梯度。其数学表示为
     \[
         \tilde{\boldsymbol{g}}_{t}=\operatorname{ternarize}\left(\boldsymbol{g}_{t}\right)=s_{t} \cdot \operatorname{sign}\left(\boldsymbol{g}_{t}\right) \circ \boldsymbol{b}_{t}
     \]
@@ -62,30 +62,33 @@
         \end{array}\right.
     \]
 
-    为了避免某些梯度过大导致绝大部分梯度被量化为0，作者引入layer-wise ternarizing，逐层的对梯度进行量化，同时对于不同层之间梯度方差的差异，作者引入gradient clipping，用方差信息对每一层的梯度进行裁剪。作者使用在MNIST和CIFAR-10上训练的卷积网络进行验证，相比32BitSGD，使用TernGrad并没有减慢收敛的速度，且精度损失也在1\%以内。
+    为了避免某些梯度过大导致$s_{t}$过大，使得大部分梯度被量化为0，作者引入layer-wise ternarizing，逐层的对梯度进行量化，同时对于不同层之间梯度方差的差异，作者引入gradient clipping，用方差信息对每一层的梯度进行裁剪。作者使用在MNIST和CIFAR-10上训练的卷积网络进行验证，相比32-bits SGD，使用TernGrad并没有减慢收敛的速度，且精度损失也在1\%以内。Wen et al.\cite{Wen}同时也完善了Alistarh et al.\cite{Alistarh}对于收敛性的证明，并解释了QSGD中的部分机理。
 
     Zhou et al.\cite{Zhou}提出的DoReFa-Net不仅对梯度进行量化，也将网络中的权重进行量化，同时提出Bit Convolution Kernels用以训练网络，DoReFa-Net对权重也同时进行量化的策略，虽然使得网络所需的运算量明显下降，但在实验中使用AlexNet进行测试，可以明显观察到精度的下降。
-
 
 
     \subsection{Gradient sparsification}
     Gradient sparsification的想法建立在梯度稀疏性的假设上，只传输部分对权重影响大的梯度，从而减少发送的数据。这方面的研究有Strom\cite{International}、Dryden et al.\cite{Dryden2016}、Lin et al.\cite{Lin2017}、Aji \& Heafield\cite{Aji2017}、Chen et al.\cite{Chen}等。
 
-    Gradient sparsification的难点主要有两点，1. 如何选择合适的阈值对梯度进行稀疏？直接设定阈值的方法虽然简单，但可能需要反复调试，且同一网络的各层也可能需要不同的阈值。设定比率的方法则会引入更多额外的计算，会降低模型训练的速度。2. 稀疏之后如何保证网络仍能收敛？几乎所有的方法都会保存下未发送的梯度，并以不同的方式反映到下一次的迭代中，以尽可能的保留梯度信息。
+    Gradient sparsification的难点主要有两点：
 
-    Strom\cite{International}同时运用了量化和稀疏的方法，只传送大于某一阈值的梯度，同时将梯度量化为1Bit，为了存储需要更新的梯度索引，用31Bit传输梯度的索引信息，同时使用了1-Bit SGD中提到的Error Feedback方法。
+    1. 如何选择合适的阈值对梯度进行稀疏？直接设定阈值的方法虽然简单，但可能需要反复调试，且同一网络的各层也可能需要不同的阈值。设定比率的方法则会引入更多额外的计算，会降低模型训练的速度。
+
+    2. 稀疏之后如何保证网络仍能收敛？对此，几乎所有的研究都会保存下未发送的梯度，并以不同的方式反映到下一次的迭代中，以尽可能的保留梯度信息。
+
+    Strom\cite{International}同时运用了量化和稀疏的方法，只传送大于某一阈值的梯度，同时将梯度量化为1bit，为了存储需要更新的梯度索引，用31bit传输梯度的索引信息，同时使用了1-bit SGD中提到的Error Feedback方法。
 
     Dryden et al.\cite{Dryden2016}直接选取阈值对梯度进行选择时可能需要多次实验才能找到适合的阈值，Dryden et al.提出使用固定比例来选择梯度，发送网络中梯度绝对值前$\pi$大的正负梯度，但相比直接使用阈值进行稀疏，这样的方法会引入额外的计算时间。
 
     Lin et al.\cite{Lin2017}使用的稀疏方法与之前类似，为了避免稀疏过程丢失大量梯度信息，会将没有超过阈值的梯度保存下来，直至其累加超过阈值才会被发送出去，同时也提出了一种对动量进行修正的方法，使得网络使用Momentum SGD进行训练时，更新的路径大致相同。
 
-    Aji \& Heafield\cite{Aji2017}提出的Gradient Dropping通过设定dropping rate进行梯度稀疏，为了尽可能多的保存信息依旧采用Error Feedback的思路，将上一轮迭代的残差加入到计算当中。使用比例的一大缺点是会引入额外的计算误差，为此Gradient Dropping使用0.1\%的梯度来计算近似阈值，Gradient Dropping还引入了Layer normalization\cite{Ba2016}规范各层的梯度范围，从而可以使用全局阈值对梯度进行稀疏。实验中使用卷积网络在MNIST上训练发现，在丢弃掉99\%的梯度后，模型的收敛速度和精度基本不受影响，继续提高丢弃率则会明显延长网络的训练时间。Layer normalization在卷积网络上没有什么作用，但在翻译任务上使用的LSTM则加快了收敛速度。实验也尝试了与梯度量化技术的结合，发现在更为复杂的LSTM模型上，1-Bit Quantization会过于激进，而2-Bit quantization对模型的影响较小。
+    Aji \& Heafield\cite{Aji2017}提出的Gradient Dropping通过设定dropping rate进行梯度稀疏，为了尽可能多的保存信息依旧采用Error Feedback的思路，将上一轮迭代的残差加入到计算当中。使用比例的一大缺点是会引入额外的计算误差，为此Gradient Dropping使用0.1\%的梯度来计算近似阈值，Gradient Dropping还引入了Layer normalization\cite{Ba2016}规范各层的梯度范围，从而可以使用全局阈值对梯度进行稀疏。实验中使用卷积网络在MNIST上训练发现，在丢弃掉99\%的梯度后，模型的收敛速度和精度基本不受影响，继续提高丢弃率则会明显延长网络的训练时间。Layer normalization\cite{Ba2016}在卷积网络上没有什么作用，但在翻译任务上使用的LSTM则加快了收敛速度。实验也尝试了与梯度量化技术的结合，发现在更为复杂的LSTM模型上，1-bit Quantization会过于激进，而2-bits quantization对模型的影响较小。
 
     Chen et al.\cite{Chen}提出的AdaComp，使用自适应的稀疏调节方法，将梯度根据网络的层级结构分入若干个桶中，统计每个桶中的最大值，如果上一轮梯度的残差加上当前梯度的两倍大于该最大值，则将该梯度量化后发送。在多个CNN网络和LSTM网络的实验下，AdaComp均保证了模型的精度和收敛速度。作者也尝试了将AdaComp和Adam优化器结合起来，在CNN网络训练的结果表明对模型并没有太大影响。
 
 
     \section{未来方向}
-    对于梯度量化的研究，Alistarh et al.\cite{Alistarh}、Wen et al.\cite{Wen}已经从数学层面上证明了量化后的梯度依然可以使得网络收敛，但如何选取合适的量化程度仍是一个值得研究的问题，Aji \& Heafield\cite{Aji2017}在实验中表明，在LSTM模型中使用1-Bit Quantization会影响模型的收敛速度，但至今也没有研究指出应该如何设定量化的程度，以及网络量化的极限是多少。
+    对于梯度量化的研究，Alistarh et al.\cite{Alistarh}、Wen et al.\cite{Wen}已经从数学层面上证明了量化后的梯度依然可以使得网络收敛，但如何选取合适的量化程度仍是一个值得研究的问题，Aji \& Heafield\cite{Aji2017}在实验中表明，在LSTM模型中使用1-bit Quantization会影响模型的收敛速度，但至今也没有研究指出应该如何设定量化的程度，以及网络量化的极限是多少。
 
     对于梯度稀疏化的研究表明在丢弃网络99\%以上的梯度后，模型依然能保持原有的精度和收敛速度，但目前在阈值选择上依旧有很多待研究的问题，直接选取阈值需要进行多次实验，且不同层间也可能需要选择不同阈值，Aji \& Heafield\cite{Aji2017}引入Layer normalization\cite{Ba2016}以保证使用全局阈值时模型的收敛速度，但同时也使得模型更为复杂。Dryden et al.\cite{Dryden2016}采用比例的方法则会引入很多额外的运算，如何平衡梯度稀疏后的模型的复杂度与精度依然是一个值得研究的问题。
 

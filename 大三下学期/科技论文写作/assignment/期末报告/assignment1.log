@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.6.1)  29 JUN 2020 15:28
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.6.1)  30 JUN 2020 17:29
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -306,19 +306,19 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 20.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
-] [2] [3] [4] (./assignment1.bbl [5] [6]
+] [2] [3] [4] [5] (./assignment1.bbl [6] [7]
 Overfull \hbox (9.09395pt too wide) in paragraph at lines 104--110
 \TU/lmr/m/n/10.95 https://www.aaai.org/ocs/index.php/AAAI/AAAI18/paper/viewPaper/16859 
  []
 
-) [7] (./assignment1.aux) ) 
+) [8] (./assignment1.aux) ) 
 Here is how much of TeX's memory you used:
  5954 strings out of 479418
  164415 string characters out of 5888106
- 459847 words of memory out of 5000000
+ 458847 words of memory out of 5000000
  23415 multiletter control sequences out of 15000+600000
  542575 words of font info for 90 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 44i,12n,60p,565b,305s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 44i,12n,60p,579b,303s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on assignment1.pdf (7 pages).
+Output written on assignment1.pdf (8 pages).
