@@ -1,10 +1,10 @@
 % 遗传算法
 % 设精度为1e-4,则x,y的解空间被60000等分，需要16位二进制数进行编码
 
-N = 100; % 种群大小
-iter = 200; % 最大迭代次数
-crossover_rate = 0.5; % 交配概率
-mutation_rate = 0.001; % 变异概率
+N = 20; % 种群大小
+iter = 50; % 迭代次数
+crossover_rate = 0.2; % 交配比例
+mutation_rate = 0.05; % 变异概率
 encode_l = 16; % 编码长度
 parent_number = ceil(N*crossover_rate); % 繁殖个体数量
 child_number = N - parent_number; % 替代个体数量
@@ -91,8 +91,12 @@ for i = 1:iter
     end
 end
 
-disp(best_point(iter-9:iter,:))
-disp(best_fitness(iter-9:iter))
+plot(best_fitness)
+
+[best_value, index] = max(best_fitness);
+
+fprintf("最优点：[%.4f,%.4f]\n",best_point(index,:));
+fprintf("函数值：%.4f\n",best_value);
 
 % 二进制解码
 function x = decode(x)

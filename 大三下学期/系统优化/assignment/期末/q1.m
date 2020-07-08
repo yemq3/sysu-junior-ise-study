@@ -14,7 +14,7 @@ x2 = [0;1];
 
 x3 = [1;0];
 
-i = 1;
+i = 0;
 
 x = [x1,x2,x3];
 
@@ -59,16 +59,19 @@ while 1
     fprintf("----------------------------------------------\n");
     i = i + 1;
     % 避免除0，分母加一个很小的数
-    if abs((f(x(:,3)) - f(x(:,1))) / (f(x(:,1) + 1e-6))) <= epsilon 
+    if abs((f(x(:,3)) - f(x(:,1))) / (f(x(:,1) + 1e-5))) <= epsilon 
         break
     end
 end
+
+fprintf("迭代次数:%d\n",i);
 
         
 function y = f(x)
     y=(x(1)-5)^2+(x(2)-6)^2;
 end
 
+% 将x按函数的值从小到大排序
 function x = sortByf(x)
     y1 = f(x(:,1));
     y2 = f(x(:,2));

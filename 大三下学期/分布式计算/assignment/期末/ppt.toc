@@ -1,0 +1,6 @@
+\beamer@sectionintoc {1}{问题描述}{3}{0}{1}
+\beamer@sectionintoc {2}{模型描述}{4}{0}{2}
+\beamer@subsectionintoc {2}{1}{优化目标}{5}{0}{2}
+\beamer@subsectionintoc {2}{2}{状态及动作空间}{6}{0}{2}
+\beamer@subsectionintoc {2}{3}{回报函数}{7}{0}{2}
+\beamer@subsectionintoc {2}{4}{监测系统}{8}{0}{2}
